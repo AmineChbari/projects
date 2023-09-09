@@ -153,3 +153,14 @@ $RECYCLE.BIN/
 # ajouts
 dist/
 package-lock.json
+
+dist/
+node_modules/
+# package-lock.json should not be ignored
+# Uncomment the line below if you want to ignore it
+# !package-lock.json
+# src/ should not be ignored as it contains your source code
+# Uncomment the line below if you want to ignore it
+# !src/
+# You may want to include webpack configuration if it's necessary for your project
+# webpack.config.js
