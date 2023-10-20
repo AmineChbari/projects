@@ -1,8 +1,7 @@
-
 # Created by https://www.gitignore.io/api/node,emacs,windows
 
 ### Emacs ###
-# -*- mode: gitignore; -*-
+# Editor backup files
 *~
 \#*\#
 /.emacs.desktop
@@ -16,54 +15,54 @@ tramp
 .org-id-locations
 *_archive
 
-# flymake-mode
+# Flymake-mode
 *_flymake.*
 
-# eshell files
+# Eshell files
 /eshell/history
 /eshell/lastdir
 
-# elpa packages
+# Elpa packages
 /elpa/
 
-# reftex files
+# Reftex files
 *.rel
 
 # AUCTeX auto folder
 /auto/
 
-# cask packages
+# Cask packages
 .cask/
 
 # Flycheck
 flycheck_*.el
 
-# server auth directory
+# Server auth directory
 /server/
 
-# projectiles files
+# Projectile files
 .projectile
 projectile-bookmarks.eld
 
-# directory configuration
+# Directory configuration
 .dir-locals.el
 
-# saveplace
+# Saveplace
 places
 
-# url cache
+# URL cache
 url/cache/
 
-# cedet
+# CEDET
 ede-projects.el
 
-# smex
+# Smex
 smex-items
 
-# company-statistics
+# Company-statistics
 company-statistics-cache.el
 
-# anaconda-mode
+# Anaconda-mode
 anaconda-mode/
 
 ### Node ###
@@ -86,7 +85,7 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
-# nyc test coverage
+# NYC test coverage
 .nyc_output
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
@@ -95,7 +94,7 @@ coverage
 # Bower dependency directory (https://bower.io/)
 bower_components
 
-# node-waf configuration
+# Node-waf configuration
 .lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
@@ -105,13 +104,13 @@ build/Release
 node_modules/
 jspm_packages/
 
-# Typescript v1 declaration files
+# TypeScript v1 declaration files
 typings/
 
 # Optional npm cache directory
 .npm
 
-# Optional eslint cache
+# Optional ESLint cache
 .eslintcache
 
 # Optional REPL history
@@ -126,7 +125,6 @@ typings/
 # dotenv environment variables file
 .env
 
-
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -135,9 +133,6 @@ ehthumbs_vista.db
 
 # Folder config file
 Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
 
 # Windows Installer files
 *.cab
@@ -148,19 +143,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.gitignore.io/api/node,emacs,windows
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
 
-# ajouts
+# Additional project-specific exclusions
 dist/
 package-lock.json
-
-dist/
-node_modules/
-# package-lock.json should not be ignored
-# Uncomment the line below if you want to ignore it
-# !package-lock.json
-# src/ should not be ignored as it contains your source code
-# Uncomment the line below if you want to ignore it
-# !src/
-# You may want to include webpack configuration if it's necessary for your project
-# webpack.config.js
