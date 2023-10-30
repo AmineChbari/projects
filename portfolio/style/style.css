@@ -3,3 +3,22 @@
     color: white !important; /* Change text color to white or any color suitable for dark mode */
   }
   
+  body {
+    background-color: rgb(238, 231, 225);
+  }
+
+  header {
+    background-color: rgb(26, 31, 116);
+  }
+
+  svg:hover {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+  }
+  
+  svg {
+    transform: none;
+    transition: transform 0.3s ease;
+  }
+  
+  
