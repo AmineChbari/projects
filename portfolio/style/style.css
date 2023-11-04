@@ -1,22 +1,17 @@
-  .dark-mode {
-    background-color: #121212 !important; /* Change this to your preferred dark mode background color */
-    color: white !important; /* Change text color to white or any color suitable for dark mode */
-  }
-  
-  body {
+/* body {
     background-color: rgb(238, 231, 225);
   }
 
   header {
     background-color: rgb(26, 31, 116);
-  }
+  } */
 
-  svg:hover {
+  svg:hover .navItem:hover {
     transform: scale(1.2);
     transition: transform 0.3s ease;
   }
   
-  svg {
+  svg .navItem {
     transform: none;
     transition: transform 0.3s ease;
   }

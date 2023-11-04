@@ -8,35 +8,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css">
     <link rel="stylesheet" href="../style/style.css">
     <script src="../script/darkMode.js"></script>
+    <script src="../node_modules/flowbite/dist/flowbite.bundle.js"></script>
     <title>CHBARI Amine</title>
 </head>
 
 <body class=" font-sans">
     <!-- Use flexbox and fixed position to create a sticky header with navigation links -->
-    <header class="flex flexbox justify-between px-3 py-5 shadow-md fixed w-full z-10 top-0">
-        <div class="flex items-center text-white">
-            <!-- Use text-xl and font-bold to style your name as a logo -->
-            <a href="#" class="text-xl font-bold">CHBARI Amine</a>
-        </div>
+    <header class="inset-x-0 flex flexbox justify-between px-8 py-3 shadow-md fixed z-10 top-0 bg-gradient-to-r from-red-800 to-blue-700 text-blue-700 rounded-b-lg border-b-4 border-white">
         <nav>
             <ul class="flex items-center space-x-4">
                 <!-- Use hover effects and active class to style the navigation links -->
-                <li><a href="#about" class=" text-white hover:text-black active:text-indigo-600">About</a></li>
-                <li><a href="#projects" class=" text-white hover:text-black active:text-indigo-600">Projects</a></li>
-                <li><a href="#skills" class=" text-white hover:text-black active:text-indigo-600">Skills</a></li>
-                <li><a href="#contact" class=" text-white hover:text-black active:text-indigo-600">Contact</a></li>
-                <li>
-                    <button type="button" id="darkModeButton" class="my-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-                        </svg>
-                    </button>
-                </li>
+                <li class="navItem"><a href="#about" class="text-white hover:text-blue-700 active:text-purple-600 font-bold text-xl mx-1 hover:underline">About</a></li>
+                <li class="navItem"><a href="#projects" class="text-white hover:text-blue-700 active:text-purple-600 font-bold text-xl mx-1 hover:underline">Projects</a></li>
+                <li class="navItem"><a href="#skills" class="text-white hover:text-blue-700 active:text-purple-600 font-bold text-xl mx-1 hover:underline">Skills</a></li>
+                <li class="navItem"><a href="#contact" class="text-white hover:text-blue-700 active:text-purple-600 font-bold text-xl mx-1 hover:underline">Contact</a></li>
             </ul>
         </nav>
+        <button type="button" id="darkModeButton" class="my-btn text-white hover:text-red-800 active:text-purple-600 right-0 inset-x-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+            </svg>
+        </button>
     </header>
 
     <main class="mt-16">
+        <div class="flex items-center text-dark">
+            <!-- Use text-xl and font-bold to style your name as a logo -->
+            <a href="#" class="text-xl font-bold"></a>
+        </div>
         <!-- Use grid layout and gap utilities to create a two-column layout for the about section -->
         <section id="about" class="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 py-12 bg-white">
             <!-- Use object-cover and rounded utilities to style the image -->
@@ -45,7 +44,7 @@
             </div>
             <!-- Use text utilities to style the heading and the paragraph -->
             <div class="flex flex-col justify-center items-start">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">About Me</h2>
+                <h2 class="text-2xl text-gray-800 mb-4">Hello, I'm <span class="font-bold text-4xl">CHBARI Amine</span> .</h2>
                 <p class="text-gray-600 leading-relaxed">Welcome to my portfolio! I am a passionate computer science student with expertise in creating intuitive and user-friendly interfaces. I believe in the power of design to solve problems and enhance user experiences. With a strong foundation in UX/UI principles, I strive to create visually appealing and functional designs that leave a lasting impression.</p>
             </div>
         </section>
@@ -54,7 +53,7 @@
         <!-- Use grid layout and gap utilities to create a three-column layout for the projects section -->
         <section id="projects" class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 py-12 bg-gray-100">
             <!-- Use text utilities to style the heading -->
-            <h2 class="text-3xl font-bold text-gray-800 col-span-full mb-8">Projects</h2>
+            <h2 class="text-3xl font-bold text-gray-800 col-span-full mb-8 underline underline-offset-auto">Projects</h2>
             <!-- Use card components to display each project with an image, a title, and a description -->
             <!-- Use flexbox and space-between utilities to align the card content -->
             <!-- Use hover effects and transition utilities to add some interactivity -->
@@ -66,7 +65,28 @@
                     <p class="text-gray-700 mt-3">A responsive website that adapts to different screen sizes and devices using modern web technologies.</p>
                 </div>
                 <div class="flex justify-between items-center m-4">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-800 active:text-indigo-900">View Project</a>
+                    <span class="text-gray-600">2022</span>
+                </div>
+            </div>
+            <div class="card hover:shadow-lg transition duration-300 ease-in-out">
+                <img src="../images/bird game on.jpg" alt="Project 3" class="w-full h-48 object-cover">
+                <div class="m-4">
+                    <span class="font-bold text-indigo-600 text-sm uppercase">Mini game</span>
+                    <h3 class="font-bold text-gray-900 text-xl mt-2">Hit the target</h3>
+                    <p class="text-gray-700 mt-3">A web app that displays the current weather and forecast for any location using a weather API and charts.</p>
+                </div>
+                <div class="flex justify-between items-center m-4">
+                    <span class="text-gray-600">2023</span>
+                </div>
+            </div>
+            <div class="card hover:shadow-lg transition duration-300 ease-in-out">
+                <img src="../images/pong on.jpg" alt="Project 3" class="w-full h-48 object-cover">
+                <div class="m-4">
+                    <span class="font-bold text-indigo-600 text-sm uppercase">Mini game</span>
+                    <h3 class="font-bold text-gray-900 text-xl mt-2">Ping Pong</h3>
+                    <p class="text-gray-700 mt-3">A web app that displays the current weather and forecast for any location using a weather API and charts.</p>
+                </div>
+                <div class="flex justify-between items-center m-4">
                     <span class="text-gray-600">2023</span>
                 </div>
             </div>
@@ -78,19 +98,28 @@
                     <p class="text-gray-700 mt-3">A simple and elegant todo list app that helps you organize your tasks and manage your time efficiently.</p>
                 </div>
                 <div class="flex justify-between items-center m-4">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-800 active:text-indigo-900">View Project</a>
                     <span class="text-gray-600">2023</span>
                 </div>
             </div>
             <div class="card hover:shadow-lg transition duration-300 ease-in-out">
-                <img src="../images/p2.jpg" alt="Project 3" class="w-full h-48 object-cover">
+                <img src="../images/pndmc.jfif" alt="Project 3" class="w-full h-48 object-cover">
                 <div class="m-4">
-                    <span class="font-bold text-indigo-600 text-sm uppercase">Web App</span>
-                    <h3 class="font-bold text-gray-900 text-xl mt-2">Weather Dashboard</h3>
+                    <span class="font-bold text-indigo-600 text-sm uppercase">Strategy game</span>
+                    <h3 class="font-bold text-gray-900 text-xl mt-2">Pandemic</h3>
                     <p class="text-gray-700 mt-3">A web app that displays the current weather and forecast for any location using a weather API and charts.</p>
                 </div>
                 <div class="flex justify-between items-center m-4">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-800 active:text-indigo-900">View Project</a>
+                    <span class="text-gray-600">2023</span>
+                </div>
+            </div>
+            <div class="card hover:shadow-lg transition duration-300 ease-in-out">
+                <img src="../images/prtf.jpg" alt="Project 3" class="w-full h-48 object-cover">
+                <div class="m-4">
+                    <span class="font-bold text-indigo-600 text-sm uppercase">personal Website</span>
+                    <h3 class="font-bold text-gray-900 text-xl mt-2">Portfolio</h3>
+                    <p class="text-gray-700 mt-3">A web app that displays the current weather and forecast for any location using a weather API and charts.</p>
+                </div>
+                <div class="flex justify-between items-center m-4">
                     <span class="text-gray-600">2023</span>
                 </div>
             </div>
@@ -172,7 +201,7 @@
     </section>
 
         <!-- Use flexbox and space-between utilities to create a contact section with a form and social media icons -->
-        <section id="contact" class="flex flex-col md:flex-row justify-between items-center px-4 py-12 bg-white">
+        <section id="contact" class="flex flex-col md:flex-row justify-between items-center px-4 py-12 bg-gray-100">
             <!-- Use text utilities to style the heading and the paragraph -->
             <div class="w-full md:w-1/2 mb-8 md:mb-0">
                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Contact Me</h2>
@@ -198,9 +227,9 @@
             </form>
         </section>
     </main>
-    <footer class="flex flex-col md:flex-row justify-center items-center px-4 py-6 bg-white border-t border-gray-200">
+    <footer class="flex flex-col md:flex-row justify-center items-center px-4 py-6 bg-gradient-to-r from-blue-700 to-red-800 rounded-t-lg border-t-4">
         <!-- Use text utilities to style your name and location -->
-        <div class="text-gray-600">
+        <div class="text-white">
             <p class="font-bold text-lg">&copy; 2023 CHBARI Amine</p>
             <p class="text-sm">Villeneuve-d'Ascq, Hauts-de-France, France</p>
         </div>
