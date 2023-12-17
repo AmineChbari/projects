@@ -7,7 +7,7 @@
     <!-- Import Tailwind CSS CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css">
     <link rel="stylesheet" href="../style/style.css">
-    <script src="../script/darkMode.js"></script>
+    <!-- <script src="../script/darkMode.js"></script> -->
     <script src="../node_modules/flowbite/dist/flowbite.bundle.js"></script>
     <title>CHBARI Amine</title>
 </head>
@@ -18,10 +18,10 @@
         <nav>
             <ul class="flex items-center space-x-4">
                 <!-- Use hover effects and active class to style the navigation links -->
-                <li class="navItem"><a href="#about" class="text-white hover:text-blue-700 active:text-purple-600 font-bold text-xl mx-1 hover:underline">About</a></li>
-                <li class="navItem"><a href="#projects" class="text-white hover:text-blue-700 active:text-purple-600 font-bold text-xl mx-1 hover:underline">Projects</a></li>
-                <li class="navItem"><a href="#skills" class="text-white hover:text-blue-700 active:text-purple-600 font-bold text-xl mx-1 hover:underline">Skills</a></li>
-                <li class="navItem"><a href="#contact" class="text-white hover:text-blue-700 active:text-purple-600 font-bold text-xl mx-1 hover:underline">Contact</a></li>
+                <li class="navItem"><a href="#about" class="text-white active:text-purple-600 font-bold text-xl mx-1 hover:underline">About</a></li>
+                <li class="navItem"><a href="#projects" class="text-white active:text-purple-600 font-bold text-xl mx-1 hover:underline">Projects</a></li>
+                <li class="navItem"><a href="#skills" class="text-white active:text-purple-600 font-bold text-xl mx-1 hover:underline">Skills</a></li>
+                <li class="navItem"><a href="#contact" class="text-white active:text-purple-600 font-bold text-xl mx-1 hover:underline">Contact</a></li>
             </ul>
         </nav>
         <button type="button" id="darkModeButton" class="my-btn text-white hover:text-red-800 active:text-purple-600 right-0 inset-x-0">
@@ -44,7 +44,7 @@
             </div>
             <!-- Use text utilities to style the heading and the paragraph -->
             <div class="flex flex-col justify-center items-start">
-                <h2 class="text-2xl text-gray-800 mb-4">Hello, I'm <span class="font-bold text-4xl">CHBARI Amine</span> .</h2>
+                <h2 class="text-2xl text-gray-800 mb-4">Hello, I'm <span class="font-bold text-4xl" >CHBARI Amine</span> .</h2>
                 <p class="text-gray-600 leading-relaxed">Welcome to my portfolio! I am a passionate computer science student with expertise in creating intuitive and user-friendly interfaces. I believe in the power of design to solve problems and enhance user experiences. With a strong foundation in UX/UI principles, I strive to create visually appealing and functional designs that leave a lasting impression.</p>
             </div>
         </section>
@@ -205,7 +205,7 @@
             <!-- Use text utilities to style the heading and the paragraph -->
             <div class="w-full md:w-1/2 mb-8 md:mb-0">
                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Contact Me</h2>
-                <p class="text-gray-600 leading-relaxed">Got a project in mind or want to collaborate? I would love to hear from you! Feel free to reach out using the contact form below or connect with me on my social media profiles. Let's discuss your ideas, requirements, and how we can work together to create something remarkable. I'm excited to embark on new design adventures, so don't hesitate to get in touch!</p>
+                <p class="text-gray-600 leading-relaxed">Got a project in mind or want to collaborate? I would love to hear from you! Feel free to reach out using the contact form or directly at <b>aminechbaibar@gmail.com</b> .</p>
             </div>
             <!-- Use form utilities to style the input fields and the button -->
             <!-- Use flexbox and space-x utilities to align the input fields horizontally -->
@@ -213,9 +213,9 @@
             <form action="#" method="POST" class="w-full md:w-1/2">
                 <div class="flex flex-col space-y-4">
                     <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                        <input type="text" name="name" id="name" placeholder="Your name" required
+                        <input type="text" name="name" id="name" placeholder="Name" required
                             class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200">
-                        <input type="email" name="email" id="email" placeholder="Your email" required
+                        <input type="email" name="email" id="email" placeholder="Email" required
                             class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-200">
                     </div>
                     <input type="text" name="subject" id="subject" placeholder="Subject"
