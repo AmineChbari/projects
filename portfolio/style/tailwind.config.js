@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
+  darkModeClass: 'dark-mode',
   content: [],
   theme: {
     extend: {},
@@ -9,4 +10,3 @@ module.exports = {
     require('flowbite/plugin')
   ],
 }
-

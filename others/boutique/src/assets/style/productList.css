@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+
+.filter {
+   position : absolute ;
+   top: 15px;
+   right : 30px;
+   font-size : larger;
+   text-align : center;
+}
+
+.productsZone {
+   height : 90%;
+   overflow: scroll;
+}

@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+body {
+   font-size : 14px;
+}
+
+h4 {
+   margin : 12px 0px;
+   font-size : x-large;
+}
+
+#insertReactHere>div {
+   display : flex;
+}
+
+div.productList,
+div.cart {
+   padding: 0px 10px 10px 10px;
+   border: solid thin #DDD;
+   margin: 5px;
+   height : 600px;
+}
+
+div.productList {
+   width: 600px;
+   position : relative;
+   top : 0px;
+   left : 0px;
+}
+
+div.cart {
+   width: 280px;
+}
+
+img.button {
+   margin : 0px 5px;
+   width : 20px;
+   border: solid 2px lightgreen;
+   padding : 2px;
+   border-radius : 4px;
+}
+img.button:hover {
+   border : solid 2px red;
+}

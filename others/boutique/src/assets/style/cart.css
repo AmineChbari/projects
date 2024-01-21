@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+input[type=number] {
+   width : 48px;
+   text-align : right;
+   font-size : 18px;
+}
+.cart {
+   position  : relative;
+}
+
+.total > div {
+   display: inline-block;
+}
+
+div.cart .imageProduit img {
+   border: solid 1px rgb(128, 128, 256);
+   border-radius: 4px;
+   width: 24px;
+}
+
+div.cart div.total {
+   border : solid 2px green;
+   margin : auto;
+   width : 98%;
+   padding : 8px 0px;
+   text-align : center;
+   background-color : wheat;
+   position : absolute;
+   bottom : 0px;
+   left : 2px;
+}
