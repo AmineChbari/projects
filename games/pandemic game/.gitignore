@@ -1,0 +1,17 @@
+/bin/
+/classes/
+/docs/
+/doc/
+/gradle/
+/lib/
+.project
+.classpath
+.settings
+.metadata
+.gradle
+build.gradle
+gradlew
+gradlew.bat
+settings.gradle
+.class
+/jars/jeu.jar

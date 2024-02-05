@@ -1,0 +1,56 @@
+{
+  "cities": {
+    "ville-1": 0,
+    "ville-2": 0,
+    "ville-3": 1,
+    "ville-4": 1,
+    "ville-5": 3,
+    "ville-6": 3,
+    "ville-7": 2,
+    "ville-8": 2
+  },
+  "neighbors": {
+    "ville-1": [
+      "ville-2",
+      "ville-3",
+      "ville-5",
+      "ville-6"
+    ],
+    "ville-2": [
+      "ville-1",
+      "ville-3",
+      "ville-7"
+    ],
+    "ville-3": [
+      "ville-1",
+      "ville-2",
+      "ville-7",
+      "ville-4"
+    ],
+    "ville-4": [
+      "ville-3",
+      "ville-5"
+    ],
+    "ville-5": [
+      "ville-1",
+      "ville-4",
+      "ville-6",
+      "ville-8"
+    ],
+    "ville-6": [
+      "ville-1",
+      "ville-5",
+      "ville-8"
+    ],
+    "ville-7": [
+      "ville-2",
+      "ville-3",
+      "ville-8"
+    ],
+    "ville-8": [
+      "ville-5",
+      "ville-6",
+      "ville-7"
+    ]
+  }
+}

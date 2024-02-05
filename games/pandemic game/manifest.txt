@@ -1,0 +1,2 @@
+Main-Class: main.Livrable4Main
+Class-Path: ./json-20220924.jar
