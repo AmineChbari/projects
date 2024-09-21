@@ -1,12 +1,19 @@
 @charset "UTF-8";
 
 body {
-   font-size : 14px;
+   font-size : 16px;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   background-color: #131313f9;
+}
+h1{
+   color: white;
 }
 
 h4 {
    margin : 12px 0px;
    font-size : x-large;
+   color: white;
+   padding-bottom: 2%;
 }
 
 #insertReactHere>div {
@@ -16,20 +23,23 @@ h4 {
 div.productList,
 div.cart {
    padding: 0px 10px 10px 10px;
-   border: solid thin #DDD;
+   border: solid thin #ffffff;
+   background-image: linear-gradient(to bottom right, #008006c9,#020075a8 );
    margin: 5px;
-   height : 600px;
+   border-radius: 2%;
 }
 
 div.productList {
-   width: 600px;
+   width: 70%;
    position : relative;
    top : 0px;
    left : 0px;
+   height : 900px;
 }
 
 div.cart {
-   width: 280px;
+   width: 30%;
+   height : 600px;
 }
 
 img.button {

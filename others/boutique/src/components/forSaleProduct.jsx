@@ -20,7 +20,7 @@ export default class ForSaleProduct extends React.Component {
         <div className='imageProduit'>
             <img src={this.props.image} alt={this.props.name} />
         </div>
-        <div className='stock'>qté {this.props.stock}</div>
+        <div className='stock'>qty {this.props.stock}</div>
         <div className='price'>{this.props.price}</div>
         <img 
           src={Panier} 

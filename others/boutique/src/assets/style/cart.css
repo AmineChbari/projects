@@ -20,13 +20,14 @@ div.cart .imageProduit img {
 }
 
 div.cart div.total {
-   border : solid 2px green;
+   border : solid 2px #05161A;
    margin : auto;
-   width : 98%;
+   width : 90%;
    padding : 8px 0px;
    text-align : center;
-   background-color : wheat;
+   color: white;
+   background-color : #072E33;
    position : absolute;
-   bottom : 0px;
-   left : 2px;
+   bottom : 5px;
+   left : 15px;
 }

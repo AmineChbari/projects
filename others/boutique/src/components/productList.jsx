@@ -44,7 +44,7 @@ export default class ProductList extends React.Component {
     );
     return (
       <div className='productList'>
-        <h4>Boutique</h4>
+        <h4>Shop</h4>
         <Filter filterText={this.state.filterText} filterChanged={this.filterChanged.bind(this)} />
         <div className='productsZone'>
           {lst}

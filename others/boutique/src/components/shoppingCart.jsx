@@ -44,11 +44,11 @@ export default class ShoppingCart extends React.Component {
 
     return (
       <div className='cart'>
-        <div className='weight'>poids total: {this.state.totalWeight}</div>
-        <h4>Panier</h4>
+        <div className='weight'>total weight: {this.state.totalWeight}</div>
+        <h4>Cart</h4>
         {lst}
         <div className='total'>
-          total commande:
+          Total price:
           <div className='price'>{this.state.totalPrice}</div>
         </div>
       </div>

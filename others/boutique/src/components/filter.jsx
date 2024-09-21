@@ -14,7 +14,7 @@ export default class Filter extends React.Component {
   render() {
     return (
         <input
-            className='filter' id="filtre" type="text" placeholder="filtre products..."
+            className='filter' id="filtre" type="text" placeholder="filter products..."
             value = {this.props.filterText}
             onChange = {this.handlefilterChange}
         />
