@@ -97,6 +97,12 @@ module.exports = {
           from: '**/*.{html,css,svg,json,ico,png,gif,woff2,eot,ttf}',
           to: DIST_FOLDER,
         },
+        {
+          context: path.resolve(__dirname, 'src', 'images'),
+          from: '**/*',
+	  to:   'images/[name][ext]',
+          noErrorOnMissing: true
+	},
       ],
     }),
 
