@@ -21,7 +21,7 @@ public class Game {
 	/** The board of the game*/
 	private Board board;
 	/** responsible for Random choosing*/
-	public static ListChooser<Action> lc = new RandomListChooser<>();
+	private static ListChooser<Action> lc = new RandomListChooser<>();
 	/** Number of actions per player (4 actions)*/
 	private static final int NB_TOUR = 4;
 	/** max number of cars in the player hand */
@@ -49,11 +49,11 @@ public class Game {
 			this.board.setCurrentPlayer(player);
 			// 4 ACTIONS
 			System.out.println("\nstep3: play 4 actions for each player:");
-			int NbTour = NB_TOUR;
-			while(NbTour > 0){
+			int nbTour = NB_TOUR;
+			while(nbTour > 0){
 				System.out.println("\nPlayer : "+player);
-				int x =player.play();
-				NbTour-=x;
+				int x = player.play();
+				nbTour -= x;
 			}
 
 			// 2 PLAYER CARDS
@@ -78,15 +78,23 @@ public class Game {
         	System.out.println("drawn cards :\n");
         	for (int i = 0; i < 2; i++) {
         		InfectionCard c = this.board.getInfectionCardDeck().Pop();
-        		c.ability(this.board, pls.get(0), c.getDiseaseType());
+        		c.ability(this.board, player, c.getDiseaseType());
         		System.out.println(c);
         	}
-			this.board.Reset_SameWave();
+			this.board.resetSameWave();
 			
 		}
 		System.out.println(this.board);
 	}
 	
+	/**
+	 * getter for the list chooser (used by players to select actions)
+	 * @return the ListChooser instance
+	 */
+	public static ListChooser<Action> getLc() {
+		return lc;
+	}
+
 	/**
 	 * getter for the board
 	 * @return the board

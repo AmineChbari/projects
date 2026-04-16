@@ -43,13 +43,20 @@ public class Cure implements Action {
 		myList.addAll(p.getCity().getDiseases().keySet());
 		Disease diseaseToCure = DiseaseToChoose.choose("CHOOSE DISEASE TO CURE: ",myList);
 		System.out.println("Choice : " + diseaseToCure);
-		int count  = 0;
+		// Collect cards matching the disease to cure
+		List<PlayerCard> matchingCards = new ArrayList<>();
 		for(PlayerCard playerCard : p.getHandDeck()) {
 			if(playerCard.getDiseaseType() == diseaseToCure) {
-				count++;
+				matchingCards.add(playerCard);
 			}
 		}
+		int count = matchingCards.size();
 		if (p.getCity().getLaboratory() && count > 4) {
+			// Discard the 5 used cards from the player's hand
+			for (int i = 0; i < 5; i++) {
+				p.removeCard(matchingCards.get(i));
+				this.board.getPlayerCardDeck().discard(matchingCards.get(i));
+			}
 			diseaseToCure.cure();
 			Cure.isGameWin();
 		}

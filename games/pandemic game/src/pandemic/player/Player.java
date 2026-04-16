@@ -122,7 +122,7 @@ public abstract class Player {
 	 * @throws GameWinException game is win
 	 */
 	public int play() throws GameWinException {
-		Action a = Game.lc.choose("Choisissez parmi", this.ActionsArray);
+		Action a = Game.getLc().choose("Choisissez parmi", this.ActionsArray);
 		System.out.println("Choice : "+a+"\n");
 		return a.doSomething();
 	}

@@ -34,7 +34,7 @@ public class Livrable1Main {
         System.out.println("step1: Initial state of the cities:");
         myboard.setMapCities();
         myboard.setNeighborsCities();
-        myboard.InitCityDiseases();
+        myboard.initCityDiseases();
         myboard.setDisease();
         System.out.println(myboard);
 
@@ -43,12 +43,12 @@ public class Livrable1Main {
 
         // InfectCity(City,Disease) pas de String, a la place de ville-i on fait this.mapCities.get(i);
         try {
-			myboard.InfectCity(myboard.getMapCities().get(1),Disease.JAUNE);
-			myboard.InfectCity(myboard.getMapCities().get(3),Disease.NOIR);
-	        myboard.InfectCity(myboard.getMapCities().get(6),Disease.BLEU);
-	        myboard.InfectCity(myboard.getMapCities().get(7),Disease.JAUNE);
-	        myboard.InfectCity(myboard.getMapCities().get(4),Disease.BLEU);
-	        myboard.InfectCity(myboard.getMapCities().get(5),Disease.NOIR);
+			myboard.infectCity(myboard.getMapCities().get(1),Disease.JAUNE);
+			myboard.infectCity(myboard.getMapCities().get(3),Disease.NOIR);
+	        myboard.infectCity(myboard.getMapCities().get(6),Disease.BLEU);
+	        myboard.infectCity(myboard.getMapCities().get(7),Disease.JAUNE);
+	        myboard.infectCity(myboard.getMapCities().get(4),Disease.BLEU);
+	        myboard.infectCity(myboard.getMapCities().get(5),Disease.NOIR);
 		} catch (GameOverException e) {
 			e.printStackTrace();
 		}
@@ -62,14 +62,14 @@ public class Livrable1Main {
         // // Trigger an outbreak
          System.out.println("\nStep4: Triggering outbreak in ville-7 infect+2 \n");
          try {
-			myboard.InfectCity(myboard.getMapCities().get(6),Disease.BLEU);
+			myboard.infectCity(myboard.getMapCities().get(6),Disease.BLEU);
 		} catch (GameOverException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
          System.out.println(myboard);
          try {
-			myboard.InfectCity(myboard.getMapCities().get(6),Disease.BLEU);
+			myboard.infectCity(myboard.getMapCities().get(6),Disease.BLEU);
 		} catch (GameOverException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class Livrable1Main {
          System.out.println(myboard);
          System.out.println("Step4 :outbreak\n");    //ville 7=3cube
          try {
-			myboard.InfectCity(myboard.getMapCities().get(6),Disease.BLEU);
+			myboard.infectCity(myboard.getMapCities().get(6),Disease.BLEU);
 		} catch (GameOverException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,9 +88,9 @@ public class Livrable1Main {
          System.out.println("Step6 :State of the cities after the 2nd outbreak by infect 3 more time ville-7:\n\n");
         
          try {
-        	 myboard.InfectCity(myboard.getMapCities().get(6),Disease.BLEU);
-             myboard.InfectCity(myboard.getMapCities().get(6),Disease.BLEU);
-			myboard.InfectCity(myboard.getMapCities().get(6),Disease.BLEU);
+        	 myboard.infectCity(myboard.getMapCities().get(6),Disease.BLEU);
+             myboard.infectCity(myboard.getMapCities().get(6),Disease.BLEU);
+			myboard.infectCity(myboard.getMapCities().get(6),Disease.BLEU);
 		} catch (GameOverException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

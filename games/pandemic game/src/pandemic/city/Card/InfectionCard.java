@@ -46,7 +46,7 @@ public class InfectionCard extends CityCard {
 
 
 	public void ability(Board board, Player player, Disease disease) throws GameOverException {
-		board.InfectCity(this.city, disease);
+		board.infectCity(this.city, disease);
 		board.getInfectionCardDeck().discard(this);
 	}
 }

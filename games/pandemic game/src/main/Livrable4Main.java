@@ -77,7 +77,7 @@ public class Livrable4Main {
                 G.play(players);
             } catch (GameWinException e) {
             	System.out.println("\n\n" + Color.GREEN.getColor() + "YOU WIN : " + Color.BLACK.getColor() + e.getMessage());
-                System.exit(1);
+                System.exit(0); // 0 = success: all diseases cured
             } catch (GameOverException e) {
             	System.out.println("\n\n" + Color.RED.getColor() + "GAME OVER ! " + Color.BLACK.getColor() + e.getMessage());
                 System.exit(1);

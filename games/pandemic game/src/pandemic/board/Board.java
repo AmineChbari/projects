@@ -55,11 +55,11 @@ public class Board {
 
     /**
      * A Board constructor take file.json for argument
-     * @param Filemane name of map's File.json
+     * @param filename name of map's File.json
      */
-    public Board(String Filemane) {
+    public Board(String filename) {
         try {
-            FileReader reader = new FileReader(Filemane);
+            FileReader reader = new FileReader(filename);
             this.cityMap = new JSONObject(new JSONTokener(reader));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -136,11 +136,10 @@ public class Board {
      * add cities from the map to a list mapCities
      */
     public void setMapCities() {
-        Set<String> cities = this.cities().keySet();
-        for (String city : cities) {
-            Integer diseaseCityValue = this.cities().get(city);
-            Disease diseaseOfCity = this.getDiseaseColorOfCity(diseaseCityValue);
-            City c = new City(city, diseaseOfCity);
+        Map<String, Integer> citiesMap = this.cities(); // parse JSON once
+        for (Map.Entry<String, Integer> entry : citiesMap.entrySet()) {
+            Disease diseaseOfCity = this.getDiseaseColorOfCity(entry.getValue());
+            City c = new City(entry.getKey(), diseaseOfCity);
             this.mapCities.add(c);
             this.nbCities++;
         }
@@ -148,31 +147,35 @@ public class Board {
 
     /**
      * set all cities and their neighbours
+     * Uses a HashMap for O(n) lookup instead of O(n³) nested loops
     */
      public void setNeighborsCities(){
-   		Set<String> allNeighbors = this.neighbors().keySet(); // neighbors du JSON
-   		for (String cityName : allNeighbors){ // pour une ville de neighbors du JSON
-   			Set<String> neighbors = this.neighbors().get(cityName);
-   			List<City> neighborsOfTheCity = new ArrayList<>();
-   			for (String neighbor : neighbors){ // pour une des voisines de cette ville
-   				for (City city : this.mapCities){
-   					if (neighbor.equals(city.getName())){ // on cherche l'object City correspondant au nom de la ville voisine
-   						neighborsOfTheCity.add(city);
-   					}
-   				}
-   			}
-   			for (City city : this.mapCities){ // on ajoute la liste des voisins au
-   				if (cityName.equals(city.getName())){
-   					city.setNeighbors(neighborsOfTheCity);
-   				}
-   			}
-   		}
+        // Build city lookup map once: O(n)
+        Map<String, City> cityLookup = new HashMap<>();
+        for (City city : this.mapCities) {
+            cityLookup.put(city.getName(), city);
+        }
+        Map<String, Set<String>> allNeighbors = this.neighbors(); // parse JSON once
+        for (Map.Entry<String, Set<String>> entry : allNeighbors.entrySet()) {
+            String cityName = entry.getKey();
+            List<City> neighborsOfTheCity = new ArrayList<>();
+            for (String neighbor : entry.getValue()) {
+                City neighborCity = cityLookup.get(neighbor);
+                if (neighborCity != null) {
+                    neighborsOfTheCity.add(neighborCity);
+                }
+            }
+            City city = cityLookup.get(cityName);
+            if (city != null) {
+                city.setNeighbors(neighborsOfTheCity);
+            }
+        }
    	}
 
     /**
      * initializes all the cities with 0 for each disease
      */
-    public void InitCityDiseases() {
+    public void initCityDiseases() {
         for (City city : this.mapCities) {
             city.setOneDisease(Disease.JAUNE, 0);
             city.setOneDisease(Disease.ROUGE, 0);
@@ -193,7 +196,7 @@ public class Board {
     	// initialize the City's Diseases, Board diseases, mapCities and city' neighbors
     	this.setMapCities();
     	this.setNeighborsCities();
-    	this.InitCityDiseases();
+    	this.initCityDiseases();
     	this.setDisease();
     	// initialize the Decks
     	this.infectionCardDeck = new Deck<InfectionCard>();
@@ -214,8 +217,7 @@ public class Board {
         	List<PlayerCard> cards = new ArrayList<PlayerCard>();
         	p.setCity(startingCity);
         	for (int i=0; i<6-nbOfPlayers; i++) {  // 2 players : 4 cards | 3 players : 3 cards | 4 players : 2 cards
-        		PlayerCard c = (PlayerCard) playerCards.get(i);
-            	playerCards.remove(i);
+        		PlayerCard c = (PlayerCard) playerCards.remove(0); // always remove index 0 to avoid skipping cards
             	cards.add(c);
             }
         	p.setCards(cards);
@@ -338,12 +340,12 @@ public class Board {
      * @param disease disease which we infect with
      * @throws GameOverException game is over
      */
-    public void InfectCity(City city, Disease disease) throws GameOverException {
+    public void infectCity(City city, Disease disease) throws GameOverException {
     	int newEclosions = 0;
     	
     	if (! disease.isErradicated()) {
     		newEclosions = city.infect(disease);
-            this.Reset_PreviousInfector(city);
+            this.resetPreviousInfector(city);
     	}
     	this.nbEclosion += newEclosions;
     	if (this.nbEclosion >= maxNbEclosion) {
@@ -375,7 +377,7 @@ public class Board {
      * reset the wave so all the infection focus areas can be affected again
      * this action is called after we switch the turn of play to another player
      */
-    public void Reset_SameWave() {
+    public void resetSameWave() {
         for (City ville : this.mapCities) {
             ville.setTheSameWave(false);
         }
@@ -386,7 +388,7 @@ public class Board {
      * this action is called after switching from an action to another
      * @param city represente the city
      */
-    public void Reset_PreviousInfector(City city) {
+    public void resetPreviousInfector(City city) {
         city.SetPreviousInfector(null);
     }
 

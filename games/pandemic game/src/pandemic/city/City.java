@@ -199,6 +199,17 @@ public class City {
 		return false;
 	}
 
+	/**
+	 * Returns a hash code based on the city name, consistent with equals().
+	 * Required when overriding equals() — Java contract.
+	 *
+	 * @return hash code of the city name
+	 */
+	@Override
+	public int hashCode() {
+		return this.name.hashCode();
+	}
+
 	// -----------------------Infect and treat methods-----------------------
 	/**
 	 * infect a city with a disease, if it has already 3 cubes of this disease,
@@ -216,24 +227,26 @@ public class City {
     	}
 		else if (!this.diseases.containsKey(disease)) {
 			this.diseases.put(disease, 1);
+			disease.AddRemoveFromNbOfCubes(-1); // cube placed on board
 		} else {
 			if (this.diseases.get(disease) == MAX_INFECTION_LEVEL) { // Verifying if this city contains 3 infection level of this disease
+				// Outbreak: no new cube placed on THIS city, propagate to neighbors
 				this.sameWave = true;
 				for (City neighbor : this.neighbors) {
-					if ((!neighbor.IsOnSameWave()) && (!this.checkPreviousInfector(neighbor))) { // not including the cities that have been infected the same wage
-						// not including the previous Infector city
+					if ((!neighbor.IsOnSameWave()) && (!this.checkPreviousInfector(neighbor))) {
 						neighbor.SetPreviousInfector(this);
 						res += neighbor.infect(disease);
 					}
 				}
 				res++;
+				// Note: do NOT decrement disease.nbOfCubes here — no cube was added to this city
 			} else {
 				int count = this.diseases.get(disease);
 				count++;
 				this.diseases.put(disease, count);
+				disease.AddRemoveFromNbOfCubes(-1); // cube placed on board
 			}
 		}
-		disease.AddRemoveFromNbOfCubes(-1);
 		return res;
 	}
 

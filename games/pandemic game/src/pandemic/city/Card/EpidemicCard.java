@@ -57,7 +57,7 @@ public class EpidemicCard extends Card {
 		City cityToInfect = UpperCard.getCity();
 		// Infect 3 time the new city with the disease from the UpperCard card
 		for (int i = 0; i < 3; i++) {
-		 	board.InfectCity(cityToInfect,UpperCard.getDiseaseType());
+		 	board.infectCity(cityToInfect,UpperCard.getDiseaseType());
 		}
 		//3--Intensify
 		board.getInfectionCardDeck().discard(UpperCard);
