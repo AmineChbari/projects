@@ -3,24 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <title>VoteApp — À propos</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/images/img.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(17, 24, 39, 0.65);
+            z-index: 0;
+        }
+        .content { position: relative; z-index: 1; }
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-900">
-    <div class="container mx-auto p-4">
-        <h1 class="text-3xl font-bold mb-4">Infos sur le projet</h1>
-        <p class="mb-4"><b>Projet qui simule un processus de vote</b></p>
-        <ul class="list-disc pl-5">
-            <li>
-                <i>Version du projet:</i>
-                <code class="text-blue-500">'1.0.0'</code>
-            </li>
-            <li>
-                <i>Auteur:</i>
-                <code class="text-blue-500">CHBARI Amine</code>
-            </li>
-        </ul>
+<body>
+    <nav class="content fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-3 z-50"
+         style="background: rgba(17,24,39,0.6); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <span class="text-white font-bold text-lg">🗳️ VoteApp</span>
+        <a href="/"
+           class="flex items-center gap-2 text-sm text-white font-medium px-4 py-2 rounded-lg transition-all"
+           style="background: rgba(255,255,255,0.12);"
+           onmouseover="this.style.background='rgba(255,255,255,0.22)'"
+           onmouseout="this.style.background='rgba(255,255,255,0.12)'">
+            ← Accueil
+        </a>
+    </nav>
+
+    <div class="content min-h-screen pt-24 pb-10 px-4 flex flex-col items-center justify-center">
+        <div class="glass rounded-2xl p-10 w-full max-w-lg text-center">
+            <div class="text-5xl mb-4">ℹ️</div>
+            <h1 class="text-3xl font-extrabold text-white mb-6">À propos</h1>
+            <p class="text-gray-300 mb-8">
+                Application de vote en temps réel construite avec
+                <span class="text-indigo-400 font-semibold">Node.js</span>,
+                <span class="text-indigo-400 font-semibold">Socket.IO</span> et
+                <span class="text-indigo-400 font-semibold">Webpack</span>.
+            </p>
+            <div class="grid grid-cols-2 gap-4 text-sm mb-8">
+                <div class="rounded-xl p-4" style="background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3);">
+                    <p class="text-indigo-300 text-xs mb-1 uppercase tracking-wider font-semibold">Version</p>
+                    <p class="text-white font-bold">1.0.0</p>
+                </div>
+                <div class="rounded-xl p-4" style="background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3);">
+                    <p class="text-indigo-300 text-xs mb-1 uppercase tracking-wider font-semibold">Auteur</p>
+                    <p class="text-white font-bold">Amine Chbari</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-center gap-2">
+                <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(34,197,94,0.2);color:#86efac;border:1px solid rgba(34,197,94,0.3)">Node.js</span>
+                <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(99,102,241,0.2);color:#a5b4fc;border:1px solid rgba(99,102,241,0.3)">Socket.IO</span>
+                <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(59,130,246,0.2);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)">Webpack</span>
+                <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(245,158,11,0.2);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)">Babel</span>
+                <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(236,72,153,0.2);color:#f9a8d4;border:1px solid rgba(236,72,153,0.3)">JavaScript ES6+</span>
+            </div>
+        </div>
     </div>
-    <script src="/socket.io/socket.io.js"></script>
 </body>
 </html>

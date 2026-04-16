@@ -1,67 +1,67 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vote</title>
+    <title>VoteApp — Accueil</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/images/img.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(17, 24, 39, 0.65);
+            z-index: 0;
+        }
+        .content { position: relative; z-index: 1; }
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .card-hover:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-4px);
+        }
+    </style>
 </head>
+<body>
+    <div class="content min-h-screen flex flex-col items-center justify-center px-4 py-16">
 
-<body class="bg-gray-100 text-gray-900">
-    <div class="container mx-auto px-4 py-8">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h1 class="text-5xl font-extrabold mb-4 text-indigo-600">Bienvenue sur notre site de vote !</h1>
-                <p class="text-xl text-gray-600 mb-8">Participez à la prise de décision collective</p>
-            </div>
-
-            <!-- Image container -->
-            <div class="mb-12 rounded-lg overflow-hidden shadow-xl">
-                <img src="/images/img.jpeg" alt="Vote illustration" class="w-full h-[32rem] object-cover">
-            </div>
-
-            <!-- Navigation cards -->
-            <nav class="grid md:grid-cols-3 gap-6">
-                <a href="/admin-vote" class="transform hover:scale-105 transition-transform duration-300">
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl">
-                        <div class="text-indigo-500 mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <h2 class="text-xl font-bold text-center mb-2">Administration</h2>
-                        <p class="text-gray-600 text-center">Gérer les votes</p>
-                    </div>
-                </a>
-
-                <a href="/votant" class="transform hover:scale-105 transition-transform duration-300">
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl">
-                        <div class="text-indigo-500 mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <h2 class="text-xl font-bold text-center mb-2">Voter</h2>
-                        <p class="text-gray-600 text-center">Participez au vote</p>
-                    </div>
-                </a>
-
-                <a href="/about" class="transform hover:scale-105 transition-transform duration-300">
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl">
-                        <div class="text-indigo-500 mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <h2 class="text-xl font-bold text-center mb-2">À propos</h2>
-                        <p class="text-gray-600 text-center">En savoir plus</p>
-                    </div>
-                </a>
-            </nav>
+        <div class="text-center mb-14">
+            <div class="text-5xl mb-4">🗳️</div>
+            <h1 class="text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg">VoteApp</h1>
+            <p class="text-xl text-gray-300">Participez à la prise de décision collective, en temps réel.</p>
         </div>
-    </div>
-    <script src="/socket.io/socket.io.js"></script>
-</body>
 
+        <nav class="grid md:grid-cols-3 gap-6 w-full max-w-3xl">
+            <a href="/admin-vote" class="glass card-hover rounded-2xl p-8 text-center transition-all duration-300 cursor-pointer block">
+                <div class="text-4xl mb-4">⚙️</div>
+                <h2 class="text-xl font-bold text-white mb-2">Administration</h2>
+                <p class="text-gray-400 text-sm">Lancer et gérer les votes</p>
+            </a>
+            <a href="/votant" class="glass card-hover rounded-2xl p-8 text-center transition-all duration-300 cursor-pointer block">
+                <div class="text-4xl mb-4">✅</div>
+                <h2 class="text-xl font-bold text-white mb-2">Voter</h2>
+                <p class="text-gray-400 text-sm">Participer à un scrutin en cours</p>
+            </a>
+            <a href="/about" class="glass card-hover rounded-2xl p-8 text-center transition-all duration-300 cursor-pointer block">
+                <div class="text-4xl mb-4">ℹ️</div>
+                <h2 class="text-xl font-bold text-white mb-2">À propos</h2>
+                <p class="text-gray-400 text-sm">Informations sur le projet</p>
+            </a>
+        </nav>
+
+        <p class="content text-gray-500 text-sm mt-14">
+            Fait par <span class="text-indigo-400 font-medium">Amine Chbari</span>
+        </p>
+    </div>
+</body>
 </html>
