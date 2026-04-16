@@ -9,6 +9,7 @@ const init = () => {
     socket.emit(msg.VOTANT);
     initMessageListener();
     initVoteButtons();
+    enableVoteButtons(false); // Les boutons sont désactivés jusqu'au début d'un vote
 }
 
 const initMessageListener = () => {
@@ -29,18 +30,20 @@ const initMessageListener = () => {
     });
 }
 
+const VALID_VOTES = ['pour', 'contre', 'nppv', 'abstention'];
+
 const initVoteButtons = () => {
-    const buttons = document.querySelectorAll("button");
+    const buttons = document.querySelectorAll("button[data-vote]");
     buttons.forEach(button => {
         button.addEventListener('click', () => {
-            const vote = button.id;
+            const vote = button.dataset.vote;
+            if (!VALID_VOTES.includes(vote)) return; // validation côté client
+
             console.log(`Voting: ${vote}`);
             socket.emit(msg.NEW_VOTE, vote);
-            
+
             document.getElementById('voteActuelUtilisateur').textContent = `Votre vote actuel : ${vote.toUpperCase()}`;
             document.getElementById('message').textContent = 'Vote enregistré. Vous pouvez changer votre vote tant que le scrutin est ouvert.';
-            
-            enableVoteButtons(true);
         });
     });
 }

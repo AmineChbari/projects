@@ -6,7 +6,8 @@ import { getContentTypeFrom } from '../utils/contentType.utils.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const BASE = 'http://localhost:8080/';
+const PORT = process.env.PORT || 8080;
+const BASE = `http://localhost:${PORT}/`;
 const PUBLIC_PATH = path.resolve(__dirname, '../public');
 const ERROR_FILE = 'html/error.html';
 
@@ -21,9 +22,9 @@ export default class RequestController {
   #mapRoutes;  // map of routes
 
   constructor(request, response) {
-    this.#request = request,
+    this.#request = request;
     this.#response = response;
-    this.#url = new URL(this.request.url, BASE).pathname;
+    this.#url = new URL(this.#request.url, BASE).pathname;
     this.#initmapRoutes();
   }
 
@@ -47,7 +48,7 @@ export default class RequestController {
 
   async handleRequest() {
     await this.buildResponse();
-    this.response.end();
+    // Note: response.end() is called inside sendFile() via finally block
   }
 
   async buildResponse() {
@@ -78,8 +79,13 @@ export default class RequestController {
     } catch (err) {
       // handle file not found or other errors
       this.response.statusCode = 404;
-      const errorData = await fs.readFile(path.join(PUBLIC_PATH, ERROR_FILE));
-      this.response.write(errorData);
+      try {
+        const errorData = await fs.readFile(path.join(PUBLIC_PATH, ERROR_FILE));
+        this.response.write(errorData);
+      } catch {
+        // fallback if even the error page is missing
+        this.response.write('<h1>404 - Page not found</h1>');
+      }
     } finally {
       this.response.end();
     }

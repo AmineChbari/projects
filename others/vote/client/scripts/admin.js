@@ -18,7 +18,8 @@ const initMessageListener = () => {
     socket.on(msg.ADMIN_ACCEPTED, adminAccepted);
     socket.on(msg.ADMIN_REFUSED, adminRefused);
     socket.on(msg.NEW_VOTE, handleNewVote);
-    socket.on(msg.BYE, () => console.log('Disconnected from server'));
+    socket.on(msg.END_VOTE, displayResults);
+    socket.on(msg.BYE, adminDisconnected);
 }
 
 const initButtons = () => {
@@ -181,8 +182,9 @@ const adminRefused = () => {
     alert('Connexion refusée : il y a déjà un administrateur connecté.');
 };
 
-const adminDisconnected = () => displayMessage('Vous avez été déconnecté.');
-console.log('Vous avez été déconnecté.');
+const adminDisconnected = () => {
+    displayMessage('Vous avez été déconnecté du serveur.');
+    document.getElementById('admin').style.display = 'none';
+};
 
 socket.on(msg.WELCOME, init);
-socket.on(msg.BYE, adminDisconnected);

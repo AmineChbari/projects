@@ -45,12 +45,12 @@ export default class IOController {
         } else {
             this.#admin = socket;
             socket.emit(msg.ADMIN_ACCEPTED);
-            for (let i = 0; i < this.#votants.size; i++) {
-                socket.emit(msg.VOTANT);
-            }
-            socket.on('disconnect', () => this.adminIsDisconnecting());
+            // Notify admin of currently connected voters
+            this.#votants.forEach(() => socket.emit(msg.VOTANT));
+            // Register admin-specific event handlers
             socket.on(msg.START_VOTE, (subject) => this.startVote(subject));
             socket.on(msg.END_VOTE, () => this.endVote());
+            // Note: disconnect is already handled in registerSocket()
         }
     }
 

@@ -13,6 +13,7 @@ const io = new IOServer(server);
 const ioController = new IOController(io);
 io.on('connection', ioController.registerSocket.bind(ioController));
 
-server.listen(8080, () => {
-    console.log('Server is running on port 8080');
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
