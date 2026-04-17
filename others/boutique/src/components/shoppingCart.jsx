@@ -58,30 +58,20 @@ export default class ShoppingCart extends React.Component {
   // send from cart
   DeleteFromCart(Prd) {
     this.props.productToDelete(Prd);
-    const updatedProducts = this.state.products.filter(item => item.id !== Prd.id);
-    const prix = this.state.totalPrice - (Prd.price* Prd.xstock);
-    const poids = this.state.totalWeight - (Prd.weight* Prd.xstock);
-    this.setState(
-      {
-        products: updatedProducts,
-        totalPrice:prix,
-        totalWeight: poids
-      });
-      
+    this.setState(prevState => ({
+      products: prevState.products.filter(item => item.id !== Prd.id),
+      totalPrice: prevState.totalPrice - (Prd.price * Prd.xstock),
+      totalWeight: prevState.totalWeight - (Prd.weight * Prd.xstock)
+    }));
   }
 
   // receive from shelf
   productAdded(Prd) {
-    const updatedProducts = [...this.state.products, Prd];
-    const prix = this.state.totalPrice + Prd.price;
-    const poids = this.state.totalWeight + Prd.weight;
-    this.setState(
-      {
-        products: updatedProducts,
-        totalPrice:prix,
-        totalWeight: poids
-      });
-        
+    this.setState(prevState => ({
+      products: [...prevState.products, Prd],
+      totalPrice: prevState.totalPrice + Prd.price,
+      totalWeight: prevState.totalWeight + Prd.weight
+    }));
   }
 
   updateQte(theProps, theQte) {

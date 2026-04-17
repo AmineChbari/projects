@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -12,7 +11,7 @@ const cssLoader = {
   },
 };
 
-const PRODUCTION = false;
+const PRODUCTION = process.env.NODE_ENV === 'production';
 const DIST_FOLDER = 'dist';
 
 module.exports = {
@@ -27,14 +26,17 @@ module.exports = {
   },
 
   mode: (PRODUCTION ? 'production' : 'development'),
-  devtool: (PRODUCTION ? false : 'inline-source-map'),
+  devtool: (PRODUCTION ? false : 'eval-source-map'),
 
   resolve: {
     extensions: ['.js', '.jsx', '.css'],
   },
 
   devServer: {
-    // ...other devServer options...
+    port: 3000,
+    hot: true,
+    historyApiFallback: true,
+    open: true,
   },
 
   module: {
@@ -108,16 +110,6 @@ module.exports = {
 
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
-    }),
-
-    new TerserPlugin({
-      include: /\.js$|\.jsx$/,
-      exclude: /node_modules/,
-      terserOptions: {
-        compress: {
-          warnings: PRODUCTION ? false : true,
-        },
-      },
     }),
   ],
 };

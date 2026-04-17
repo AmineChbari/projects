@@ -5,10 +5,6 @@ import Panier from "../assets/images/panier.jpg";
  define root component
 */
 export default class ForSaleProduct extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
         <div className='product'>

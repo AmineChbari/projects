@@ -1,7 +1,7 @@
 {
-   "name": "template-app",
-   "description": "template structure for js app",
-   "author": "your name",
+   "name": "boutique-peluches",
+   "description": "Boutique e-commerce de peluches et figurines collectibles (React + Webpack)",
+   "author": "Amine Chbari",
    "version": "1.0.0",
    "main": "main.js",
    "scripts": {

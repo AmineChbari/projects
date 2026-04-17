@@ -84,7 +84,7 @@ const products = [
       id: 10,
       weight: 302,
       name: "Nounours crème",
-      description: "Il est pas migon avec ses grosses papattes ?",
+      description: "Il est pas mignon avec ses grosses papattes ?",
       image: "images/nounours3.jpg",
       price: 35,
       stock: 4
@@ -93,7 +93,7 @@ const products = [
       id: 11,
       weight: 287,
       name: "Panda",
-      description: "Un bon gros pnada joufflu",
+      description: "Un bon gros panda joufflu",
       image: "images/panda.jpg",
       price: 35,
       stock: 2

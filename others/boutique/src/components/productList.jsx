@@ -45,7 +45,7 @@ export default class ProductList extends React.Component {
     return (
       <div className='productList'>
         <h4>Shop</h4>
-        <Filter filterText={this.state.filterText} filterChanged={this.filterChanged.bind(this)} />
+        <Filter filterText={this.state.filterText} filterChanged={this.filterChanged} />
         <div className='productsZone'>
           {lst}
         </div>
@@ -59,8 +59,7 @@ export default class ProductList extends React.Component {
                               if (item.id === newPrd.id) {
                                 if (!item.added) {
                                   this.props.productToAdd(newPrd);
-                                  item.added = true;
-                                  return {...item, originStock:item.stock, stock: item.stock - 1};
+                                  return {...item, added: true, originStock:item.stock, stock: item.stock - 1};
                                 }
                               }
                               return item;
@@ -75,8 +74,7 @@ export default class ProductList extends React.Component {
   removeFromCart(Prd) {
     const updatedProducts = this.state.products.map(item => {
       if (item.id === Prd.id) {
-        item.added = false;
-        return {...item, stock: item.originStock };
+        return {...item, added: false, stock: item.originStock };
       }
       return item;
     });
