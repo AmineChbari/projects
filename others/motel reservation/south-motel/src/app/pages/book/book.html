@@ -1,0 +1,133 @@
+<div class="page-hero">
+  <div class="page-hero-content">
+    <span class="section-tag">Réservation</span>
+    <h1>Réservez Votre Séjour</h1>
+    <div class="gold-line centered"></div>
+    <p>Simple, rapide et sécurisé — meilleur tarif garanti en réservation directe</p>
+  </div>
+</div>
+
+<section class="book-section">
+  <div class="container">
+
+    <!-- STEPPER -->
+    <div class="stepper">
+      <div class="step" [class.active]="step >= 1" [class.done]="step > 1">
+        <div class="step-num">{{ step > 1 ? '✓' : '1' }}</div>
+        <span>Chambre</span>
+      </div>
+      <div class="step-line" [class.done]="step > 1"></div>
+      <div class="step" [class.active]="step >= 2" [class.done]="step > 2">
+        <div class="step-num">{{ step > 2 ? '✓' : '2' }}</div>
+        <span>Vos informations</span>
+      </div>
+      <div class="step-line" [class.done]="step > 2"></div>
+      <div class="step" [class.active]="step >= 3">
+        <div class="step-num">3</div>
+        <span>Confirmation</span>
+      </div>
+    </div>
+
+    <!-- STEP 1 — CHOOSE ROOM -->
+    <div class="step-panel" *ngIf="step === 1">
+      <h3>Choisissez votre chambre</h3>
+      <div class="room-choices">
+        <div class="room-choice" *ngFor="let room of rooms"
+             [class.selected]="selectedRoom?.id === room.id"
+             (click)="selectRoom(room.taille)">
+          <img [src]="room.image" [alt]="room.nom">
+          <div class="choice-info">
+            <h4>{{ room.nom }}</h4>
+            <p>{{ room.capacite }} personne(s) · {{ room.surface }} m²</p>
+            <span class="choice-price"><strong>{{ room.prix }}€</strong>/nuit</span>
+          </div>
+          <span *ngIf="room.tag" class="choice-tag">{{ room.tag }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 — FORM -->
+    <div class="step-panel" *ngIf="step === 2">
+      <div class="book-layout">
+        <form [formGroup]="form" (ngSubmit)="submit()" class="book-form">
+          <h3>Vos informations</h3>
+
+          <div class="form-group">
+            <label>Nom complet *</label>
+            <input formControlName="nom" type="text" placeholder="Jean Dupont">
+            <span class="error-msg" *ngIf="f['nom'].invalid && f['nom'].touched">Nom requis (2 caractères min.)</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Date d'arrivée *</label>
+              <input formControlName="dateArrivee" type="date" [min]="minDate()">
+              <span class="error-msg" *ngIf="f['dateArrivee'].invalid && f['dateArrivee'].touched">Date requise</span>
+            </div>
+            <div class="form-group">
+              <label>Durée du séjour (jours) *</label>
+              <select formControlName="sejour">
+                <option *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]" [value]="n">{{ n }} nuit{{ n > 1 ? 's' : '' }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Chambre *</label>
+            <select formControlName="taille" (change)="selectRoom(+f['taille'].value)">
+              <option *ngFor="let room of rooms" [value]="room.taille">{{ room.nom }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Commentaires & demandes spéciales</label>
+            <textarea formControlName="commentaire" rows="3" placeholder="Chambre haute, lit bébé, allergies..."></textarea>
+            <span class="error-msg" *ngIf="f['commentaire'].invalid && f['commentaire'].touched">Max 120 caractères</span>
+          </div>
+
+          <div class="alert alert-error" *ngIf="error">{{ error }}</div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" (click)="step = 1">← Retour</button>
+            <button type="submit" class="btn btn-gold" [disabled]="form.invalid || loading">
+              {{ loading ? 'Envoi...' : 'Confirmer la réservation' }}
+            </button>
+          </div>
+        </form>
+
+        <!-- SUMMARY -->
+        <div class="book-summary" *ngIf="selectedRoom">
+          <div class="summary-img">
+            <img [src]="selectedRoom.image" [alt]="selectedRoom.nom">
+          </div>
+          <div class="summary-body">
+            <h4>{{ selectedRoom.nom }}</h4>
+            <p>{{ selectedRoom.capacite }} pers. · {{ selectedRoom.surface }} m²</p>
+            <div class="summary-line">
+              <span>{{ selectedRoom.prix }}€ × {{ form.value.sejour || 1 }} nuit(s)</span>
+              <strong>{{ totalPrice }}€</strong>
+            </div>
+            <div class="summary-total">
+              <span>Total estimé</span>
+              <strong>{{ totalPrice }}€</strong>
+            </div>
+            <p class="summary-note">Petit-déjeuner inclus · Taxe de séjour en sus</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 — CONFIRMATION -->
+    <div class="step-panel confirm-panel" *ngIf="step === 3">
+      <div class="confirm-icon">✓</div>
+      <h3>Réservation confirmée !</h3>
+      <p>Votre réservation <strong>#{{ bookingId }}</strong> a bien été enregistrée.<br>
+         Un e-mail de confirmation vous sera envoyé prochainement.</p>
+      <div class="confirm-actions">
+        <button class="btn btn-outline" (click)="reset()">Nouvelle réservation</button>
+        <button class="btn btn-gold" (click)="goToReservations()">Voir mes réservations</button>
+      </div>
+    </div>
+
+  </div>
+</section>

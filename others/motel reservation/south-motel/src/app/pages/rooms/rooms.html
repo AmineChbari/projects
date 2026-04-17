@@ -1,0 +1,36 @@
+<div class="page-hero">
+  <div class="page-hero-content">
+    <span class="section-tag">Nos Hébergements</span>
+    <h1>Nos Chambres & Suites</h1>
+    <div class="gold-line centered"></div>
+    <p>Quatre univers de confort, du cocon intime à la suite palaciale</p>
+  </div>
+</div>
+
+<section class="rooms-section">
+  <div class="container">
+    <div class="room-row" *ngFor="let room of rooms; let i = index" [class.reverse]="i % 2 !== 0">
+      <div class="room-row-image">
+        <img [src]="room.image" [alt]="room.nom">
+        <span *ngIf="room.tag" class="row-tag">{{ room.tag }}</span>
+      </div>
+      <div class="room-row-content">
+        <span class="section-tag">{{ room.capacite }} personne(s) · {{ room.surface }} m²</span>
+        <h2>{{ room.nom }}</h2>
+        <div class="gold-line"></div>
+        <p>{{ room.description }}</p>
+        <ul class="amenities-list">
+          <li *ngFor="let a of room.amenities">✦ {{ a }}</li>
+        </ul>
+        <div class="room-row-footer">
+          <div class="price-block">
+            <span class="price-from">À partir de</span>
+            <span class="price-val">{{ room.prix }}€</span>
+            <span class="price-unit">/nuit</span>
+          </div>
+          <button class="btn btn-gold" (click)="book(room.taille)">Réserver cette chambre</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

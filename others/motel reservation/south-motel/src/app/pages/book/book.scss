@@ -1,0 +1,184 @@
+.book-section { padding: 60px 0 100px; }
+
+/* STEPPER */
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 56px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  .step-num {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: white;
+    transition: all 0.22s;
+  }
+  span { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  &.active .step-num { border-color: var(--gold); color: var(--gold); }
+  &.done .step-num { border-color: var(--gold); background: var(--gold); color: var(--navy); }
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  max-width: 120px;
+  margin-bottom: 20px;
+  transition: background 0.3s;
+  &.done { background: var(--gold); }
+}
+
+/* STEP PANEL */
+.step-panel { max-width: 960px; margin: 0 auto; }
+.step-panel > h3 {
+  font-size: 1.5rem;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+/* ROOM CHOICES */
+.room-choices { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+.room-choice {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: white;
+
+  &:hover { border-color: var(--gold); box-shadow: var(--shadow); }
+  &.selected { border-color: var(--gold); background: rgba(201,168,76,0.04); }
+
+  img { width: 100px; height: 80px; object-fit: cover; border-radius: var(--radius); flex-shrink: 0; }
+
+  .choice-info {
+    h4 { font-size: 1rem; margin-bottom: 4px; }
+    p { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 6px; }
+    .choice-price { font-size: 0.85rem; color: var(--gold-dark); font-weight: 600;
+      strong { font-size: 1.05rem; font-family: 'Cormorant Garamond', serif; }
+    }
+  }
+
+  .choice-tag {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+  }
+}
+
+/* BOOK LAYOUT */
+.book-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  align-items: start;
+}
+
+.book-form {
+  background: white;
+  padding: 36px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  h3 { font-size: 1.4rem; margin-bottom: 28px; }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+/* SUMMARY */
+.book-summary {
+  background: var(--navy);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  color: white;
+  position: sticky;
+  top: 90px;
+
+  .summary-img img { width: 100%; height: 200px; object-fit: cover; }
+
+  .summary-body { padding: 24px; }
+
+  h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: white; margin-bottom: 6px; }
+  p { font-size: 0.82rem; color: rgba(255,255,255,0.6); margin-bottom: 16px; }
+
+  .summary-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    strong { color: white; }
+  }
+
+  .summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 14px;
+    span { color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    strong { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: white; }
+  }
+
+  .summary-note { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 10px; }
+}
+
+/* CONFIRMATION */
+.confirm-panel {
+  text-align: center;
+  padding: 60px 0;
+
+  .confirm-icon {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+  }
+
+  h3 { font-size: 2rem; margin-bottom: 16px; }
+  p { color: var(--text-muted); margin-bottom: 36px; line-height: 1.8; }
+}
+
+.confirm-actions { display: flex; gap: 14px; justify-content: center; }
+
+@media (max-width: 860px) {
+  .book-layout { grid-template-columns: 1fr; }
+  .room-choices { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}

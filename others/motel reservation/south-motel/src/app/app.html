@@ -1,0 +1,56 @@
+<nav class="navbar" [class.scrolled]="scrolled">
+  <div class="nav-inner">
+    <a routerLink="/" class="nav-logo">
+      <span class="logo-main">SOUTH MOTEL</span>
+      <span class="logo-sub">&amp; Spa</span>
+    </a>
+    <div class="nav-links" [class.open]="menuOpen">
+      <a routerLink="/"             routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="menuOpen=false">Accueil</a>
+      <a routerLink="/rooms"        routerLinkActive="active" (click)="menuOpen=false">Chambres</a>
+      <a routerLink="/reservations" routerLinkActive="active" (click)="menuOpen=false">Mes Réservations</a>
+      <a routerLink="/book" class="nav-book" (click)="menuOpen=false">Réserver</a>
+    </div>
+    <button class="hamburger" (click)="menuOpen = !menuOpen" [class.open]="menuOpen" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <span class="logo-main">SOUTH MOTEL</span>
+      <span class="logo-sub">&amp; Spa</span>
+    </div>
+    <div class="footer-grid">
+      <div>
+        <h4>Contact</h4>
+        <p>123 Avenue des Palmiers<br>Casablanca, Maroc</p>
+        <p>+212 5 22 000 000</p>
+        <p>contact&#64;southmotel.ma</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <a routerLink="/">Accueil</a>
+        <a routerLink="/rooms">Nos Chambres</a>
+        <a routerLink="/book">Réserver</a>
+        <a routerLink="/reservations">Mes Réservations</a>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <p>Spa &amp; Bien-être</p>
+        <p>Restaurant gastronomique</p>
+        <p>Piscine &amp; Fitness</p>
+        <p>Conciergerie 24h/24</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="gold-line"></div>
+      <p>© 2024 South Motel &amp; Spa. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nom": "Youness Benali",
+    "taille": 1,
+    "sejour": 5,
+    "commentaire": "Petit-déjeuner en chambre souhaité.",
+    "chambre": "Chambre Standard",
+    "dateArrivee": "2025-05-10"
+  },
+  {
+    "id": 2,
+    "nom": "Sarcus Delorme",
+    "taille": 4,
+    "sejour": 2,
+    "commentaire": "",
+    "chambre": "Suite Prestige",
+    "dateArrivee": "2025-05-15"
+  }
+]

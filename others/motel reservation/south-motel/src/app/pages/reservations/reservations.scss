@@ -1,0 +1,173 @@
+.res-section { padding: 60px 0 100px; }
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+  align-items: center;
+  .filter-cta { margin-left: auto; }
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  border: 1.5px solid var(--border);
+  border-radius: 24px;
+  background: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all 0.18s;
+  &:hover { border-color: var(--gold); color: var(--gold-dark); }
+  &.active { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 600; }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 60px;
+  .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid var(--border);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.empty-state {
+  text-align: center;
+  padding: 80px 24px;
+  span { font-size: 3rem; display: block; margin-bottom: 16px; }
+  h3 { font-size: 1.6rem; margin-bottom: 10px; }
+  p { color: var(--text-muted); margin-bottom: 28px; }
+}
+
+.res-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.res-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+  &:hover { box-shadow: var(--shadow-lg); }
+}
+
+.res-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .res-id { font-size: 0.8rem; color: var(--text-muted); margin-right: 8px; }
+}
+
+.res-actions { display: flex; gap: 8px; }
+
+.res-card-body { padding: 20px; }
+
+.res-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  &:last-child { border-bottom: none; }
+  label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 500; flex-shrink: 0; width: 100px; }
+  span { font-size: 0.88rem; color: var(--text); text-align: right; }
+}
+
+/* EDIT FORM */
+.edit-form {
+  padding: 20px;
+  h4 { font-size: 1rem; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* STATS */
+.stats-section {
+  margin-top: 40px;
+  h3 { font-size: 1.4rem; margin-bottom: 20px; }
+}
+
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+
+  th, td {
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 0.88rem;
+  }
+
+  th {
+    background: var(--navy);
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+
+  tr:nth-child(even) td { background: var(--cream); }
+  tr:hover td { background: rgba(201,168,76,0.06); }
+}
+
+/* DELETE MODAL */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(13,27,42,0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 36px;
+  max-width: 440px;
+  width: 90%;
+  box-shadow: var(--shadow-lg);
+  h4 { font-size: 1.4rem; margin-bottom: 14px; }
+  p { color: var(--text-muted); margin-bottom: 28px; line-height: 1.7; }
+}
+
+.modal-actions { display: flex; gap: 12px; justify-content: flex-end; }
+
+@media (max-width: 600px) {
+  .filter-bar .filter-cta { width: 100%; text-align: center; justify-content: center; }
+  .res-grid { grid-template-columns: 1fr; }
+  .form-row-2 { grid-template-columns: 1fr; }
+}

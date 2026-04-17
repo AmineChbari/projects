@@ -1,0 +1,140 @@
+<div class="page-hero">
+  <div class="page-hero-content">
+    <span class="section-tag">Gestion</span>
+    <h1>Mes Réservations</h1>
+    <div class="gold-line centered"></div>
+    <p>Consultez, modifiez ou annulez vos réservations</p>
+  </div>
+</div>
+
+<section class="res-section">
+  <div class="container">
+
+    <!-- ALERT -->
+    <div *ngIf="alert" class="alert" [class.alert-success]="alert.type==='success'" [class.alert-error]="alert.type==='error'">
+      {{ alert.msg }}
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filter-bar">
+      <button class="filter-btn" [class.active]="activeFilter===0" (click)="applyFilter(0)">Toutes</button>
+      <button class="filter-btn" *ngFor="let t of [1,2,3,4]" [class.active]="activeFilter===t" (click)="applyFilter(t)">
+        {{ roomNames[t] }}
+      </button>
+      <a routerLink="/book" class="btn btn-gold filter-cta">+ Nouvelle réservation</a>
+    </div>
+
+    <!-- LOADING -->
+    <div class="loading" *ngIf="loading">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- EMPTY -->
+    <div class="empty-state" *ngIf="!loading && filtered.length === 0">
+      <span>🛎️</span>
+      <h3>Aucune réservation</h3>
+      <p>Vous n'avez pas encore de réservation{{ activeFilter ? ' pour ce type de chambre' : '' }}.</p>
+      <a routerLink="/book" class="btn btn-gold">Réserver maintenant</a>
+    </div>
+
+    <!-- RESERVATIONS GRID -->
+    <div class="res-grid" *ngIf="!loading && filtered.length > 0">
+      <div class="res-card" *ngFor="let r of filtered">
+
+        <!-- VIEW MODE -->
+        <ng-container *ngIf="editId !== r.id">
+          <div class="res-card-header">
+            <div>
+              <span class="res-id">#{{ r.id }}</span>
+              <span class="badge badge-gold">{{ roomNames[r.taille] || 'Taille ' + r.taille }}</span>
+            </div>
+            <div class="res-actions">
+              <button class="btn btn-teal" (click)="startEdit(r)">✏️ Modifier</button>
+              <button class="btn btn-danger" (click)="confirmDelete(r.id)">🗑 Supprimer</button>
+            </div>
+          </div>
+          <div class="res-card-body">
+            <div class="res-field"><label>Nom</label><span>{{ r.nom }}</span></div>
+            <div class="res-field" *ngIf="r.dateArrivee"><label>Arrivée</label><span>{{ r.dateArrivee }}</span></div>
+            <div class="res-field"><label>Séjour</label><span>{{ r.sejour }} nuit{{ r.sejour > 1 ? 's' : '' }}</span></div>
+            <div class="res-field" *ngIf="r.commentaire"><label>Commentaire</label><span>{{ r.commentaire }}</span></div>
+          </div>
+        </ng-container>
+
+        <!-- EDIT MODE -->
+        <ng-container *ngIf="editId === r.id">
+          <form [formGroup]="editForm" (ngSubmit)="saveEdit(r)" class="edit-form">
+            <h4>Modifier la réservation #{{ r.id }}</h4>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>Nom *</label>
+                <input formControlName="nom" type="text">
+              </div>
+              <div class="form-group">
+                <label>Date d'arrivée</label>
+                <input formControlName="dateArrivee" type="date">
+              </div>
+            </div>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>Chambre *</label>
+                <select formControlName="taille">
+                  <option *ngFor="let t of [1,2,3,4]" [value]="t">{{ roomNames[t] }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Séjour (nuits) *</label>
+                <select formControlName="sejour">
+                  <option *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]" [value]="n">{{ n }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Commentaire</label>
+              <textarea formControlName="commentaire" rows="2"></textarea>
+            </div>
+            <div class="edit-actions">
+              <button type="button" class="btn btn-outline" (click)="cancelEdit()">Annuler</button>
+              <button type="submit" class="btn btn-gold" [disabled]="editForm.invalid">Enregistrer</button>
+            </div>
+          </form>
+        </ng-container>
+
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-section" *ngIf="!loading && reservations.length > 0">
+      <h3>Statistiques</h3>
+      <table class="stats-table">
+        <thead>
+          <tr>
+            <th>Chambre</th>
+            <th>Réservations</th>
+            <th>Durée moy.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of stats">
+            <td>{{ roomNames[s.taille] }}</td>
+            <td>{{ s.count }}</td>
+            <td>{{ s.count > 0 ? s.avgDuration + ' nuit(s)' : '—' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- DELETE MODAL -->
+<div class="modal-backdrop" *ngIf="deleteId !== null">
+  <div class="modal">
+    <h4>Confirmer la suppression</h4>
+    <p>Voulez-vous vraiment supprimer la réservation <strong>#{{ deleteId }}</strong> ? Cette action est irréversible.</p>
+    <div class="modal-actions">
+      <button class="btn btn-outline" (click)="cancelDelete()">Annuler</button>
+      <button class="btn btn-danger" style="padding:13px 28px" (click)="doDelete()">Supprimer</button>
+    </div>
+  </div>
+</div>

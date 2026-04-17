@@ -1,0 +1,110 @@
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="section-tag">Casablanca, Maroc</span>
+    <h1>L'Art de Vivre<br><em>le Luxe</em></h1>
+    <div class="gold-line"></div>
+    <p>Un havre de paix au cœur de la ville. Chambres raffinées, spa sensoriel et gastronomie d'exception pour une expérience inoubliable.</p>
+    <div class="hero-actions">
+      <a routerLink="/book" class="btn btn-gold">Réserver maintenant</a>
+      <a routerLink="/rooms" class="btn btn-outline">Découvrir les chambres</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>4</strong><span>Types de chambres</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><strong>5★</strong><span>Hôtel & Spa</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><strong>24/7</strong><span>Conciergerie</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span></span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80" alt="South Motel lobby">
+        <div class="about-badge">
+          <strong>Depuis</strong>
+          <span>2005</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <span class="section-tag">Notre histoire</span>
+        <h2>Un hôtel de prestige,<br>une âme unique</h2>
+        <div class="gold-line"></div>
+        <p>Niché au cœur de Casablanca, le South Motel & Spa incarne l'élégance marocaine contemporaine. Depuis sa fondation, l'hôtel s'est imposé comme une référence de l'hospitalité de luxe sur la côte atlantique.</p>
+        <p>Chaque détail — de l'architecture aux matériaux, du service au cadre — a été pensé pour offrir une expérience sensorielle incomparable à nos hôtes.</p>
+        <a routerLink="/rooms" class="btn btn-dark">Voir les chambres</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED ROOMS -->
+<section class="featured">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Nos chambres</span>
+      <h2>Un confort d'exception</h2>
+      <div class="gold-line centered"></div>
+    </div>
+    <div class="rooms-grid">
+      <div class="room-card" *ngFor="let room of featuredRooms">
+        <div class="room-img-wrap">
+          <img [src]="room.image" [alt]="room.nom">
+          <div class="room-overlay">
+            <button class="btn btn-gold" (click)="book(room.taille)">Réserver</button>
+          </div>
+          <span class="room-price">À partir de <strong>{{ room.prix }}€</strong>/nuit</span>
+          <span *ngIf="room.tag" class="room-tag">{{ room.tag }}</span>
+        </div>
+        <div class="room-info">
+          <div class="room-meta">
+            <span>👤 {{ room.capacite }} pers.</span>
+            <span>📐 {{ room.surface }} m²</span>
+          </div>
+          <h3>{{ room.nom }}</h3>
+          <p>{{ room.description }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="featured-cta">
+      <a routerLink="/rooms" class="btn btn-outline">Voir toutes les chambres</a>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="amenities">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Services & Équipements</span>
+      <h2>Tout pour votre bien-être</h2>
+      <div class="gold-line centered"></div>
+    </div>
+    <div class="amenities-grid">
+      <div class="amenity-card" *ngFor="let a of amenities">
+        <span class="amenity-icon">{{ a.icon }}</span>
+        <h4>{{ a.label }}</h4>
+        <p>{{ a.desc }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-overlay"></div>
+  <div class="cta-content">
+    <span class="section-tag">Offre spéciale</span>
+    <h2>Réservez en direct,<br>bénéficiez du meilleur tarif</h2>
+    <p>Petit-déjeuner inclus · Annulation gratuite · Surclassement sous réserve de disponibilité</p>
+    <a routerLink="/book" class="btn btn-gold">Réserver maintenant</a>
+  </div>
+</section>
