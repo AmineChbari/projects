@@ -49,11 +49,11 @@
         include 'menu_S.php';
        
          
-        if (isset($_GET["page"])){
-            include $_GET["page"];
-        }
-        else{
-            
+        $allowed_pages = ['init.php', 'modifresa.php', 'reservations.php'];
+        $page = isset($_GET["page"]) ? basename($_GET["page"]) : 'init.php';
+        if (in_array($page, $allowed_pages)) {
+            include $page;
+        } else {
             include 'init.php';
         }
 
