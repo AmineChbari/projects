@@ -1,33 +1,103 @@
 @charset "UTF-8";
 
-input[type=number] {
-   width : 48px;
-   text-align : right;
-   font-size : 18px;
-}
-.cart {
-   position  : relative;
-}
-
-.total > div {
-   display: inline-block;
+/* Scrollable zone for cart items */
+.cartZone {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 14px;
+  padding-right: 2px;
 }
 
+/* Cart product rows — tighter, on white card */
+div.cart div.product {
+  padding: 8px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+}
+
+div.cart div.product:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  box-shadow: none;
+}
+
+/* Smaller image in cart */
 div.cart .imageProduit img {
-   border: solid 1px rgb(128, 128, 256);
-   border-radius: 4px;
-   width: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
 }
 
-div.cart div.total {
-   border : solid 2px #05161A;
-   margin : auto;
-   width : 90%;
-   padding : 8px 0px;
-   text-align : center;
-   color: white;
-   background-color : #072E33;
-   position : absolute;
-   bottom : 5px;
-   left : 15px;
+/* No weight badge padding needed in cart */
+div.cart .info {
+  padding-right: 0;
+}
+
+/* Quantity select */
+div.cart select {
+  padding: 4px 8px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+  flex-shrink: 0;
+}
+
+div.cart select:focus {
+  border-color: var(--accent);
+}
+
+/* Empty cart message */
+.empty-cart {
+  text-align: center;
+  padding: 40px 16px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Cart total summary */
+.cart-total {
+  border-top: 2px solid var(--border);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.total-line.total-price-line {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 2px;
+}
+
+.total-line.total-price-line .price {
+  font-size: 1.15rem;
+  font-weight: 800;
+  min-width: unset;
+}
+
+/* Weight value in total (no badge styling, just text) */
+.weight-total::after {
+  content: ' g';
+  font-size: 0.85em;
 }

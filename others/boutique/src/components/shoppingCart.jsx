@@ -2,9 +2,6 @@ import React from 'react';
 import "../assets/style/cart.css";
 import ProductInCart from './productInCart.jsx';
 
-/*
- define root component
-*/
 export default class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
@@ -25,8 +22,11 @@ export default class ShoppingCart extends React.Component {
   }
 
   render() {
-    const lst = this.state.products.map(element => (
+    const { products, totalWeight, totalPrice } = this.state;
+
+    const lst = products.map(element => (
       <ProductInCart
+        key={element.id}
         id={element.id}
         name={element.name}
         description={element.description}
@@ -36,26 +36,35 @@ export default class ShoppingCart extends React.Component {
         originStock={element.stock}
         xstock={element.stock}
         DeleteFromCart={this.DeleteFromCart}
-        productAdded={this.productAdded}
         updateQte={this.updateQte}
-        key={element.id}
       />
     ));
 
     return (
       <div className='cart'>
-        <div className='weight'>total weight: {this.state.totalWeight}</div>
-        <h4>Cart</h4>
-        {lst}
-        <div className='total'>
-          Total price:
-          <div className='price'>{this.state.totalPrice}</div>
+        <h4>Mon Panier {products.length > 0 && `(${products.length})`}</h4>
+        <div className='cartZone'>
+          {lst.length === 0
+            ? <div className='empty-cart'>Votre panier est vide</div>
+            : lst
+          }
         </div>
+        {products.length > 0 && (
+          <div className='cart-total'>
+            <div className='total-line'>
+              <span>Poids total</span>
+              <span className='weight-total'>{totalWeight}</span>
+            </div>
+            <div className='total-line total-price-line'>
+              <span>Total</span>
+              <span className='price'>{totalPrice}</span>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
 
-  // send from cart
   DeleteFromCart(Prd) {
     this.props.productToDelete(Prd);
     this.setState(prevState => ({
@@ -65,7 +74,6 @@ export default class ShoppingCart extends React.Component {
     }));
   }
 
-  // receive from shelf
   productAdded(Prd) {
     this.setState(prevState => ({
       products: [...prevState.products, Prd],
@@ -75,38 +83,28 @@ export default class ShoppingCart extends React.Component {
   }
 
   updateQte(theProps, theQte) {
-    const s = { ...theProps };
     const updatedProducts = this.state.products.map(item => {
-      if (item.id === s.id) {
-        const x = { ...item, xstock: theQte };
-        return x;
+      if (item.id === theProps.id) {
+        return { ...item, xstock: theQte };
       }
-      const y = { ...item, xstock: item.stock };
-      return y;
+      return { ...item, xstock: item.stock };
     });
     this.setState(
-      {
-        products: updatedProducts
-      },
+      { products: updatedProducts },
       () => {
         this.calculateTotals(updatedProducts);
-        this.props.changeQty(s.id, theQte);
+        this.props.changeQty(theProps.id, theQte);
       }
     );
   }
-  
 
   calculateTotals(products) {
     let totalWeight = 0;
     let totalPrice = 0;
-
     products.forEach(product => {
       totalWeight += product.weight * product.xstock;
       totalPrice += product.price * product.xstock;
     });
-    this.setState({
-      totalWeight: totalWeight,
-      totalPrice: totalPrice
-    });
+    this.setState({ totalWeight, totalPrice });
   }
 }

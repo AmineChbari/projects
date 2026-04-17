@@ -1,78 +1,114 @@
 @charset "UTF-8";
 
+/* Product row */
 div.product {
-   display: flex;
-   align-items: center;  
-   border: solid thin #EEE;
-   background-color : #ffffff; 
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+  margin-bottom: 4px;
 }
 
-/* div.product:nth-of-type(even) {
-   border: solid thin #EEE;
-   background-color : #EEE;
-}
-div.product:nth-of-type(odd) {
-   border: solid thin #ddd;
-   background-color: #DDD;
-} */
 div.product:hover {
-   border : solid thin rgb(0, 0, 0);
+  background-color: var(--accent-light);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
 }
 
-.petit {
-   font-size : smaller;
+/* Product image */
+.imageProduit img {
+  width: 62px;
+  height: 62px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  flex-shrink: 0;
 }
+
+/* Info block */
 .info {
-   width: 70%;
-   position: relative;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  padding-right: 38px;
 }
+
 .name {
-   padding : 2px;
-   font-size: large;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .description {
-   font-size: smaller;
-   padding: 0px 4px;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
+/* Weight badge — scoped to .info to avoid polluting cart total */
+.info .weight {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 0.67rem;
+  color: var(--text-muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+.info .weight::after {
+  content: 'g';
+}
+
+/* Price */
 .price {
-   padding : 0px 3px;
-   margin : 0px 15px;
-   text-align : center;
-   font-size : large;
-   font-weight : bold;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--price-color);
+  flex-shrink: 0;
+  white-space: nowrap;
+  text-align: right;
+  min-width: 48px;
 }
+
 .price::after {
-   content: '€';
-   padding-left: 1px;
+  content: ' €';
+  font-size: 0.8em;
+  font-weight: 500;
 }
 
-.weight {
-   position : absolute;
-   right : 3px;
-   top : 3px;
-   font-size : smaller;
-   font-style: italic;
-   color : #bfbfbf;
-   margin: 0px 3px;   
-}
-
-.weight::after {
-   content: 'g';
-   padding-left: 1px;
-}
-
+/* Stock badge */
 .stock {
-   font-weight : bold;
-   padding-left: 4px;
-   margin : 0px 10px;
-   text-align : center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
+.stock.stock-ok {
+  background: var(--stock-ok-bg);
+  color: var(--stock-ok);
+}
 
-.imageProduit img {
-   border : solid 2px rgb(128,128,256);
-   border-radius : 6px;
-   width : 48px;
+.stock.stock-low {
+  background: var(--stock-low-bg);
+  color: var(--stock-low);
+}
+
+.stock.stock-last {
+  background: var(--stock-last-bg);
+  color: var(--stock-last);
 }
