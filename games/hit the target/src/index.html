@@ -1,45 +1,70 @@
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
-
+<html lang="fr">
 <head>
-   <meta charset="UTF-8" />
-   <title>Tir à l'arc</title>
-   <meta name="author" content="your name" />
-   <link rel="stylesheet" type="text/css" href="./style/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HIT THE TARGET — ARCADE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 </head>
-
 <body>
-   <h2>Tir à l'arc</h2>
-   <p>
-      Tirez sur les cibles pour gagner des points,
-      récupérez les flèches (trois à la fois), 
-      attention aux oiseaux.
-   </p>
 
-   <div id="game">
-      <div id="info">
-         <div id="scoreZone">
-            <div id="score"> 0 </div>pts
-         </div>
-         <div id="arrows">
-            <img src="./images/fleches.png"> : <span id="nbArrows">0</span>
-         </div>
-         <div id="lifes">
-            <img src="images/arc.png" alt="" id="life-1" />
-            <img src="images/arc.png" alt="" id="life-2" />
-            <img src="images/arc.png" alt="" id="life-3" />
-         </div>
+  <div class="scanlines"></div>
 
-         <div id="control">
-            <button id="stopAndStartGame">Jouer</button>
-         </div>
+  <div class="game-wrapper">
+
+    <header class="game-header">
+      <h1 class="game-title">HIT THE TARGET</h1>
+      <p class="game-subtitle">INSERT COIN TO PLAY</p>
+    </header>
+
+    <div class="game-main">
+
+      <aside class="hud-panel">
+        <div class="hud-block">
+          <div class="hud-label">SCORE</div>
+          <span id="score">0</span>
+        </div>
+
+        <div class="hud-block">
+          <div class="hud-label">FLECHES</div>
+          <div class="hud-arrows">
+            <img src="./images/fleches.png" alt="fleches" />
+            <span id="nbArrows">10</span>
+          </div>
+        </div>
+
+        <div class="hud-block">
+          <div class="hud-label">VIES</div>
+          <div class="hud-lives">
+            <img src="./images/arc.png" alt="vie" id="life-1" />
+            <img src="./images/arc.png" alt="vie" id="life-2" />
+            <img src="./images/arc.png" alt="vie" id="life-3" />
+          </div>
+        </div>
+
+        <div class="hud-block" style="font-size:0.34rem; color:rgba(57,255,20,0.45); line-height:1.9; text-align:left; letter-spacing:0.05em;">
+          <div style="margin-bottom:4px; color:rgba(57,255,20,0.6);">CONTROLES</div>
+          ← →  DEPLACER<br/>
+          ESPACE  TIRER<br/>
+          CLIC  TIRER
+        </div>
+      </aside>
+
+      <div class="canvas-wrap">
+        <canvas id="playfield" width="500" height="580" tabindex="1"></canvas>
       </div>
-      <div id="field">
-         <canvas id="playfield" width="500" height="580" tabindex="1"></canvas>
-      </div>
-   </div>
+
+    </div>
+
+    <div class="game-controls">
+      <button id="stopAndStartGame">▶ START</button>
+    </div>
+
+    <footer class="game-footer">AMINE CHBARI — M1 INGENIERIE LOGICIEL — ISCOD</footer>
+
+  </div>
 
 </body>
-
 </html>
