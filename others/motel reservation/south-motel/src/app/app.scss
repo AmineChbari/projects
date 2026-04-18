@@ -4,7 +4,12 @@
   top: 0; left: 0; right: 0;
   z-index: 1000;
   padding: 20px 0;
+  background: var(--navy);
   transition: background 0.3s, padding 0.3s, box-shadow 0.3s;
+
+  &.transparent {
+    background: transparent;
+  }
 
   &.scrolled {
     background: var(--navy);

@@ -124,7 +124,8 @@ button { cursor: pointer; font-family: inherit; }
 
 .page-hero {
   background: var(--navy);
-  padding: 80px 24px 60px;
+  margin-top: -64px;
+  padding: calc(80px + 64px) 24px 60px;
   text-align: center;
   color: white;
   position: relative;
