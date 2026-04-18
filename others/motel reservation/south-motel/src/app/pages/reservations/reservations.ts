@@ -65,9 +65,12 @@ export class Reservations implements OnInit {
 
   saveEdit(r: Reservation) {
     if (this.editForm.invalid) return;
+    const taille = +this.editForm.value.taille;
     const payload = {
       ...this.editForm.value,
-      chambre: ROOM_NAMES[this.editForm.value.taille]
+      taille,
+      sejour: +this.editForm.value.sejour,
+      chambre: ROOM_NAMES[taille]
     };
     this.svc.update(r.id, payload).subscribe({
       next: () => {

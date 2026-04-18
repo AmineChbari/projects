@@ -1,0 +1,12 @@
+{
+  "name": "south-motel-api",
+  "version": "1.0.0",
+  "description": "REST API for South Motel reservations",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

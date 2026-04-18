@@ -17,8 +17,8 @@ export class ReservationService {
     return this.http.post<Reservation>(this.apiUrl, data);
   }
 
-  update(id: number, data: Omit<Reservation, 'id'>): Observable<Reservation> {
-    return this.http.put<Reservation>(`${this.apiUrl}?id=${id}`, data);
+  update(id: number, data: Omit<Reservation, 'id'>): Observable<{ success: boolean }> {
+    return this.http.put<{ success: boolean }>(`${this.apiUrl}?id=${id}`, data);
   }
 
   delete(id: number): Observable<{ success: boolean }> {

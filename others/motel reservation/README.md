@@ -43,7 +43,7 @@ motel reservation/
 | Front-end | Angular 21 (NgModule) | SPA avec routing, reactive forms |
 | Style | SCSS + CSS variables | Design system luxe cohérent |
 | HTTP | Angular HttpClient | Communication avec l'API |
-| Back-end | PHP 8+ | REST API sans framework |
+| Back-end | Node.js + Express | REST API |
 | Stockage | JSON file | Persistance légère |
 | Fonts | Cormorant Garamond + Inter | Typographie hôtelière |
 
@@ -64,19 +64,19 @@ motel reservation/
 
 ### Prérequis
 - Node.js 18+ et npm
-- PHP 8+ avec `php` disponible en ligne de commande
 - Angular CLI : `npm install -g @angular/cli`
 
-### 1. Démarrer l'API PHP
+### 1. Démarrer l'API Node.js
 
 ```bash
 cd "motel reservation/api"
-php -S localhost:8080
+npm install
+npm start
 ```
 
-> L'API expose `/api` sur le port 8080. Le proxy Angular redirige automatiquement les appels `/api` vers ce serveur.
+> L'API tourne sur `http://localhost:8080`. Le proxy Angular redirige automatiquement `/api` → `http://localhost:8080/`.
 
-### 2. Démarrer Angular
+### 2. Démarrer Angular (dans un second terminal)
 
 ```bash
 cd "motel reservation/south-motel"
