@@ -3,26 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PONG — 2 Joueurs</title>
+  <title>PONG — ARCADE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <div class="scanlines"></div>
 
   <div class="game-wrapper">
 
     <header class="game-header">
       <h1 class="game-title">PONG</h1>
-      <p class="game-subtitle">Premier à 7 points remporte la partie</p>
+      <p class="game-subtitle">INSERT COIN TO PLAY</p>
     </header>
 
     <div class="scoreboard">
       <div class="player-block">
-        <span class="player-name">JOUEUR 1</span>
-        <span class="player-keys">W &nbsp;/&nbsp; S</span>
+        <span class="player-name">P1</span>
+        <span class="player-keys">W / S</span>
       </div>
-      <div class="vs-block">VS</div>
+      <div class="vs-block">— VS —</div>
       <div class="player-block player-block--right">
-        <span class="player-name">JOUEUR 2</span>
-        <span class="player-keys">↑ &nbsp;/&nbsp; ↓</span>
+        <span class="player-name">P2</span>
+        <span class="player-keys">↑ / ↓</span>
       </div>
     </div>
 
@@ -33,6 +36,8 @@
     <div class="game-controls">
       <button id="stopStartBall">▶ START</button>
     </div>
+
+    <p class="game-footer">FIRST TO 7 WINS &nbsp;•&nbsp; © 2024 AMINE CHBARI</p>
 
   </div>
 

@@ -2,7 +2,7 @@ import ballImgSrc from './assets/images/ball.png';
 
 export default class Ball {
 
-  static BALL_WIDTH = 48;
+  static BALL_WIDTH = 12;
 
   constructor(px, py, dx = 3, dy = -2) {
     this.x = px;

@@ -1,27 +1,46 @@
-# PONG — Jeu 2 Joueurs
+# 🕹️ PONG — ARCADE
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES2022-F7DF1E?style=flat-square&logo=javascript)
 ![Canvas](https://img.shields.io/badge/Canvas-2D-007ACC?style=flat-square)
 ![Webpack](https://img.shields.io/badge/Webpack-5-8DD6F9?style=flat-square&logo=webpack)
 
-Jeu Pong classique 2 joueurs développé en JavaScript vanilla avec Canvas API et architecture orientée objet.
+Jeu Pong 2 joueurs en pur JavaScript vanilla, thème **arcade pixel** avec effets néon et CRT.
+
+```
+██████╗  ██████╗ ███╗   ██╗ ██████╗
+██╔══██╗██╔═══██╗████╗  ██║██╔════╝
+██████╔╝██║   ██║██╔██╗ ██║██║  ███╗
+██╔═══╝ ██║   ██║██║╚██╗██║██║   ██║
+██║     ╚██████╔╝██║ ╚████║╚██████╔╝
+╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝
+```
 
 ---
 
 ## Gameplay
 
 - **Premier à 7 points** remporte la partie
-- La balle accélère légèrement à chaque rebond sur une raquette
-- La vitesse est plafonnée pour garder le jeu jouable
+- La balle accélère de **8% à chaque rebond** sur une raquette (plafonnée à 14px/frame)
+- Raquettes en néon cyan (P1) et rose (P2), balle en jaune pixel
 
 ### Contrôles
 
 | Joueur | Monter | Descendre |
 |--------|--------|-----------|
-| Joueur 1 (gauche) | `W` | `S` |
-| Joueur 2 (droite) | `↑` | `↓` |
+| **P1** (gauche, cyan) | `W` | `S` |
+| **P2** (droite, rose) | `↑` | `↓` |
 
-**Start / Pause / Rejouer** : bouton START en bas
+`START` — lancer / pause / rejouer
+
+---
+
+## Visuels
+
+- Police **Press Start 2P** (Google Fonts) pour l'interface et le canvas
+- Effets **néon** (glow CSS + shadowBlur Canvas) sur raquettes, balle, textes
+- **Scanlines CRT** en overlay (repeating-linear-gradient)
+- Animation **flicker** simulant un vieux moniteur arcade
+- Texte **INSERT COIN** clignotant
 
 ---
 
@@ -31,30 +50,28 @@ Jeu Pong classique 2 joueurs développé en JavaScript vanilla avec Canvas API e
 src/
 ├── index.html
 ├── scripts/
-│   ├── main.js                  # Point d'entrée, initialisation
-│   ├── ball.js                  # Classe Ball — mouvement, collision, rendu
-│   ├── obstacle.js              # Classe Obstacle — raquette de base
-│   ├── obstL.js                 # Joueur 1 (touches W/S)
-│   ├── obstR.js                 # Joueur 2 (flèches)
-│   ├── keyManager.js            # État des touches pressées
-│   ├── animation.js             # Classe Animation — game loop de base
-│   ├── animationWithObstacle.js # Jeu complet — score, game over
-│   └── assets/
-│       ├── images/ball.png
-│       └── style/style-balles.css
-└── style/
-    └── style-canvas.css
+│   ├── main.js                  # Point d'entrée
+│   ├── ball.js                  # Mouvement, collision AABB
+│   ├── obstacle.js              # Raquette de base
+│   ├── obstL.js                 # P1 (W/S)
+│   ├── obstR.js                 # P2 (↑/↓)
+│   ├── keyManager.js            # État des touches
+│   ├── animation.js             # Game loop de base
+│   ├── animationWithObstacle.js # Score, game over, rendu néon
+│   └── assets/style/
+│       └── style-balles.css     # Thème arcade pixel
+└── style/style-canvas.css
 ```
 
 ### Hiérarchie des classes
 
 ```
 Animation
-└── AnimationWithObstacle   (score, game over, paddles)
+└── AnimationWithObstacle   (score, paddles néon, game over)
 
 Obstacle
-├── ObstacleL   (contrôles gauche : W/S)
-└── ObstacleR   (contrôles droite : ↑/↓)
+├── ObstacleL   (W / S)
+└── ObstacleR   (↑ / ↓)
 ```
 
 ---
@@ -65,9 +82,8 @@ Obstacle
 cd games/pong
 npm install
 npm run dev-server
+# → http://localhost:9000
 ```
-
-Ouvre automatiquement [http://localhost:9000](http://localhost:9000)
 
 ### Build de production
 
@@ -79,12 +95,15 @@ NODE_ENV=production npm run build
 
 ## Points techniques
 
-- **Game loop** : `requestAnimationFrame` avec `cancelAnimationFrame` pour pause/reprise
-- **Collision AABB** : détection via intersection de rectangles (Axis-Aligned Bounding Box)
-- **Score** : `Ball.move()` retourne `'left'`/`'right'`/`true` pour identifier quel camp marque
-- **Vitesse** : augmentation de 8% par rebond, plafonnée à 14px/frame
-- **État touches** : `KeyManager` découple la détection clavier du rendu
-- **OOP** : héritage ES6, champs privés (`#method`)
+| Concept | Implémentation |
+|---------|---------------|
+| Game loop | `requestAnimationFrame` / `cancelAnimationFrame` |
+| Collision | AABB (Axis-Aligned Bounding Box) |
+| Score | `Ball.move()` retourne `'left'`\|`'right'`\|`true` |
+| Vitesse | +8% par rebond, plafon 14px/frame |
+| Touches | `KeyManager` découple clavier et rendu |
+| OOP | Héritage ES6, champs privés `#method` |
+| Style | CSS custom properties, animations `@keyframes` |
 
 ---
 
