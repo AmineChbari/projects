@@ -1,18 +1,125 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background-color: rgb(255, 255, 255);
-  text-align : center;
+  background: #080c14;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.game-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 32px 24px;
+}
+
+/* HEADER */
+.game-header {
+  text-align: center;
+}
+
+.game-title {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 0.4em;
+  color: white;
+  text-shadow: 0 0 40px rgba(255,255,255,0.4);
+}
+
+.game-subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.35);
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+/* SCOREBOARD */
+.scoreboard {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.player-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.player-block--right {
+  text-align: right;
+}
+
+.player-name {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+}
+
+.player-keys {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  padding: 4px 10px;
+  display: inline-block;
+}
+
+.vs-block {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.2);
+  flex-shrink: 0;
+}
+
+/* CANVAS */
+.canvas-wrap {
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 20px 60px rgba(0,0,0,0.6),
+    0 0 80px rgba(255,255,255,0.04);
+}
+
 #terrain {
-    background-color : #000000;
-  border : solid 5px rgb(69, 68, 68);
-
+  display: block;
+  background: #05080f;
 }
 
-div#control {
-  text-align : center;
-  margin : 10px;
+/* CONTROLS */
+.game-controls {
+  display: flex;
+  gap: 12px;
 }
 
-button#newBall {
+#stopStartBall {
+  background: transparent;
+  color: white;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  border-radius: 4px;
+  padding: 12px 40px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+}
+
+#stopStartBall:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.6);
 }

@@ -1,54 +1,41 @@
-
-// la source de l'image à utiliser pour la balle
 import ballImgSrc from './assets/images/ball.png';
 
-/* TYPE Ball */
 export default class Ball {
 
-	static BALL_WIDTH = 48;
+  static BALL_WIDTH = 48;
 
-  constructor(px, py, dx=3, dy=-2) {
+  constructor(px, py, dx = 3, dy = -2) {
     this.x = px;
     this.y = py;
     this.deltaX = dx;
     this.deltaY = dy;
-    this.speedMultiplier = 1;
     this.image = this.#createImage(ballImgSrc);
-    this.setRandomDirection();
   }
 
-  /* draw this ball, using the given drawing 2d context */
   draw(context) {
     context.drawImage(this.image, this.x, this.y);
   }
 
   setRandomDirection() {
-    // Generate random values for deltaX and deltaY
-    //this.deltaX = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 3 + 1); // Random value between -1 and 1, multiplied by a random speed factor
-    return (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 3 + 1); // Random value between -1 and 1, multiplied by a random speed factor
-    
-}
+    return (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 2 + 2);
+  }
 
-  move(canvas,theObst1,theObst2) {
-    const rx = this.x + this.deltaX + Ball.BALL_WIDTH;
-    const ry = this.y + this.deltaY + Ball.BALL_WIDTH;
-    if (rx > canvas.width || this.x + this.deltaX < 0) {
-      return false;
-    }
+  // Returns 'left' | 'right' if ball exited the canvas, true otherwise
+  move(canvas, theObst1, theObst2) {
+    const nx = this.x + this.deltaX;
+    const ny = this.y + this.deltaY;
 
-    if (ry > canvas.height || this.y + this.deltaY < 0) {
+    if (nx + Ball.BALL_WIDTH > canvas.width) return 'right';
+    if (nx < 0) return 'left';
+
+    if (ny + Ball.BALL_WIDTH > canvas.height || ny < 0) {
       this.deltaY = -this.deltaY;
     }
 
-    if (this.collisionWith(theObst1) || this.collisionWith(theObst2)){
+    if (theObst1 && theObst2 && (this.collisionWith(theObst1) || this.collisionWith(theObst2))) {
+      this.deltaX = -this.deltaX;
+      if (Math.abs(this.deltaX) < 14) this.deltaX *= 1.08;
       this.deltaY = this.setRandomDirection();
-      // this.deltaY = this.deltaY;
-       this.deltaX = -this.deltaX;
-
-      this.speedMultiplier += 0.01;
-        
-        this.deltaX *= this.speedMultiplier;
-        this.deltaY *= this.speedMultiplier;
     }
 
     this.x += this.deltaX;
@@ -56,25 +43,17 @@ export default class Ball {
     return true;
   }
 
-  collisionWith(Obst){
-    let P1_x = Math.max(this.x,Obst.x);
-    let P1_y = Math.max(this.y,Obst.y);
-    let P2_x = Math.min(this.x + Ball.BALL_WIDTH,Obst.x + Obst.width);
-    let P2_y = Math.min(this.y + Ball.BALL_WIDTH,Obst.y + Obst.height);
-    if (P1_x < P2_x && P1_y < P2_y) return true;
+  collisionWith(obst) {
+    const p1x = Math.max(this.x, obst.x);
+    const p1y = Math.max(this.y, obst.y);
+    const p2x = Math.min(this.x + Ball.BALL_WIDTH, obst.x + obst.width);
+    const p2y = Math.min(this.y + Ball.BALL_WIDTH, obst.y + obst.height);
+    return p1x < p2x && p1y < p2y;
   }
 
-  /* crée l'objet Image à utiliser pour dessiner cette balle */
   #createImage(imageSource) {
-	  const newImg = new Image();
-  	newImg.src = imageSource;
-  	return newImg;
+    const newImg = new Image();
+    newImg.src = imageSource;
+    return newImg;
   }
-  get width() {
-    return this.image.width;
-  }
-  get height() {
-    return this.image.height;
-  }
-
 }

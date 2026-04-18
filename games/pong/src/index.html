@@ -1,21 +1,40 @@
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
-
+<html lang="fr">
 <head>
-	<meta charset="UTF-8"/>
-	<title>balles rebondissantes</title>
-	<meta name="keywords" content="animation"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PONG — 2 Joueurs</title>
 </head>
-
 <body>
 
-<canvas id="terrain" width="1000" height="500"> </canvas>
+  <div class="game-wrapper">
 
-<div id="control">
-	<button id="stopStartBall">Start/Stop</button>
-</div>
+    <header class="game-header">
+      <h1 class="game-title">PONG</h1>
+      <p class="game-subtitle">Premier à 7 points remporte la partie</p>
+    </header>
+
+    <div class="scoreboard">
+      <div class="player-block">
+        <span class="player-name">JOUEUR 1</span>
+        <span class="player-keys">W &nbsp;/&nbsp; S</span>
+      </div>
+      <div class="vs-block">VS</div>
+      <div class="player-block player-block--right">
+        <span class="player-name">JOUEUR 2</span>
+        <span class="player-keys">↑ &nbsp;/&nbsp; ↓</span>
+      </div>
+    </div>
+
+    <div class="canvas-wrap">
+      <canvas id="terrain" width="1000" height="500"></canvas>
+    </div>
+
+    <div class="game-controls">
+      <button id="stopStartBall">▶ START</button>
+    </div>
+
+  </div>
 
 </body>
-
 </html>
