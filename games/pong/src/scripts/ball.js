@@ -3,6 +3,7 @@ import ballImgSrc from './assets/images/ball.png';
 export default class Ball {
 
   static BALL_WIDTH = 12;
+  static MAX_SPEED  = 18;   // vitesse max absolue (x ou y)
 
   constructor(px, py, dx = 3, dy = -2) {
     this.x = px;
@@ -30,11 +31,15 @@ export default class Ball {
 
     if (ny + Ball.BALL_WIDTH > canvas.height || ny < 0) {
       this.deltaY = -this.deltaY;
+      // Légère accélération sur chaque rebond mur (+3%, plafond MAX_SPEED)
+      if (Math.abs(this.deltaY) < Ball.MAX_SPEED) {
+        this.deltaY *= 1.03;
+      }
     }
 
     if (theObst1 && theObst2 && (this.collisionWith(theObst1) || this.collisionWith(theObst2))) {
       this.deltaX = -this.deltaX;
-      if (Math.abs(this.deltaX) < 14) this.deltaX *= 1.08;
+      if (Math.abs(this.deltaX) < Ball.MAX_SPEED) this.deltaX *= 1.08;
       this.deltaY = this.setRandomDirection();
     }
 

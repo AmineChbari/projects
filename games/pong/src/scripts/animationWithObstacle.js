@@ -14,11 +14,14 @@ export default class AnimationWithObstacle extends Animation {
     super(canvas);
     this.myObstacleL = obstacleL;
     this.myObstacleR = obstacleR;
-    this.keyManager  = new KeyManager();
-    this.scoreL      = 0;
-    this.scoreR      = 0;
-    this.gameOver    = false;
-    this.winner      = null;
+    this.keyManager        = new KeyManager();
+    this.scoreL            = 0;
+    this.scoreR            = 0;
+    this.gameOver          = false;
+    this.winner            = null;
+    this.lastSpeedBoost    = null;   // timestamp du dernier boost temporel
+    this.speedLevel        = 1;      // niveau de vitesse actuel (affiché)
+    this.speedFlashTimer   = 0;      // frames restantes pour afficher "SPEED UP!"
     this.addBall();
     this.#drawIdle();
   }
@@ -133,7 +136,27 @@ export default class AnimationWithObstacle extends Animation {
     ctx.restore();
   }
 
+  // Boost temporel : +15% toutes les 8 secondes, plafonné à MAX_SPEED
+  #applyTimeSpeedBoost() {
+    const MAX   = 18;
+    const BOOST = 1.15;
+    const b     = this.Ball;
+    const signX = Math.sign(b.deltaX);
+    const signY = Math.sign(b.deltaY);
+    b.deltaX = Math.min(Math.abs(b.deltaX) * BOOST, MAX) * signX;
+    b.deltaY = Math.min(Math.abs(b.deltaY) * BOOST, MAX) * signY;
+    this.speedLevel++;
+    this.speedFlashTimer = 90; // afficher pendant ~1.5s (90 frames à 60fps)
+  }
+
   animate() {
+    // --- Boost temporel toutes les 8 secondes ---
+    const now = Date.now();
+    if (this.lastSpeedBoost !== null && now - this.lastSpeedBoost >= 8000) {
+      this.#applyTimeSpeedBoost();
+      this.lastSpeedBoost = now;
+    }
+
     this.#drawBackground();
     this.#drawScores();
     this.#drawControls();
@@ -152,6 +175,13 @@ export default class AnimationWithObstacle extends Animation {
       this.myObstacleR.width, this.myObstacleR.height,
       NEON_PINK);
 
+    // Flash "SPEED UP!" + indicateur de niveau
+    if (this.speedFlashTimer > 0) {
+      this.#drawSpeedFlash();
+      this.speedFlashTimer--;
+    }
+    this.#drawSpeedLevel();
+
     const result = this.Ball.move(this.myCanvas, this.myObstacleL, this.myObstacleR);
 
     if (result === 'left') {
@@ -166,6 +196,35 @@ export default class AnimationWithObstacle extends Animation {
 
     this.#drawBall();
     this.req = window.requestAnimationFrame(this.animate.bind(this));
+  }
+
+  #drawSpeedFlash() {
+    const ctx = this.mycontext;
+    const { width: w, height: h } = this.myCanvas;
+    const alpha = Math.min(this.speedFlashTimer / 30, 1); // fade-out progressif
+    ctx.save();
+    ctx.globalAlpha  = alpha;
+    ctx.font         = `18px ${PIXEL_FONT}`;
+    ctx.textAlign    = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle    = NEON_YELLOW;
+    ctx.shadowColor  = NEON_YELLOW;
+    ctx.shadowBlur   = 20;
+    ctx.fillText('⚡ SPEED UP!', w / 2, h / 2);
+    ctx.restore();
+  }
+
+  #drawSpeedLevel() {
+    if (this.speedLevel <= 1) return;
+    const ctx = this.mycontext;
+    const { width: w } = this.myCanvas;
+    ctx.save();
+    ctx.font         = `8px ${PIXEL_FONT}`;
+    ctx.textAlign    = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillStyle    = `rgba(255,230,0,0.5)`;
+    ctx.fillText(`SPEED x${this.speedLevel}`, w / 2, 8);
+    ctx.restore();
   }
 
   #drawBall() {
@@ -196,10 +255,13 @@ export default class AnimationWithObstacle extends Animation {
 
   startAndStop() {
     if (this.gameOver) {
-      this.scoreL   = 0;
-      this.scoreR   = 0;
-      this.gameOver = false;
-      this.winner   = null;
+      this.scoreL          = 0;
+      this.scoreR          = 0;
+      this.gameOver        = false;
+      this.winner          = null;
+      this.speedLevel      = 1;
+      this.speedFlashTimer = 0;
+      this.lastSpeedBoost  = Date.now();
       this.addBall();
       document.getElementById('stopStartBall').textContent = '⏸ PAUSE';
       this.req = window.requestAnimationFrame(this.animate.bind(this));
@@ -207,10 +269,20 @@ export default class AnimationWithObstacle extends Animation {
     }
 
     if (this.req) {
+      // Pause : on mémorise le temps écoulé pour ne pas perdre le compteur
+      this.pausedAt = Date.now();
       window.cancelAnimationFrame(this.req);
       this.req = null;
       document.getElementById('stopStartBall').textContent = '▶ REPRENDRE';
     } else {
+      // Reprise : décaler lastSpeedBoost du temps de pause
+      if (this.pausedAt && this.lastSpeedBoost !== null) {
+        this.lastSpeedBoost += Date.now() - this.pausedAt;
+      }
+      // Premier démarrage
+      if (this.lastSpeedBoost === null) {
+        this.lastSpeedBoost = Date.now();
+      }
       document.getElementById('stopStartBall').textContent = '⏸ PAUSE';
       this.req = window.requestAnimationFrame(this.animate.bind(this));
     }
