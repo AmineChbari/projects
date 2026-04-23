@@ -1,0 +1,44 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Gestion Groupes
+    link(rel="stylesheet" href="/style/main.css")
+    script(src="/scripts/groups.bundle.js" defer)
+  body
+    header
+      nav
+        ul
+          li: a(href="/") Accueil
+          li: a(href="/students") Gérer les Étudiants
+    h1 Gestion des Groupes
+    div#message
+    
+    // Boutons d'actions groupées
+    div.auto-assign-container
+      button#auto-assign-btn.add Distribuer automatiquement (Round Robin)
+      button#empty-groups-btn.remove Vider tous les groupes
+      
+    section.container
+      div.groups-section
+        h2 Groupes
+        each groupNumber in [1, 2, 3, 4, 5, 6]
+          div.group-box
+            h3 Groupe #{groupNumber}
+            ul(id=`group-${groupNumber}-students`)
+      div.students-section
+        h2 Étudiants disponibles
+        div#assignment-status.status-message
+        div.student-controls
+          select#student-selector
+            option(value="") Sélectionner un étudiant
+          select#group-number-selector
+            option(value="") Sélectionner un groupe
+            each groupNumber in [1, 2, 3, 4, 5, 6]
+              option(value=groupNumber) Groupe #{groupNumber}
+          button#add-student-btn.add Ajouter au groupe
+        ul#students-list
+    footer
+      p © 2025 Gestion Étudiants et Groupes.
+      p Développé par [CHBARI Amine]

@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server for managing students and groups application",
+  "license": "ISC",
+  "author": "Amine Chbari",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app.js",
+    "dev": "nodemon app.js",
+    "import-students-data": "mongoimport --db gestionEtudiants --collection students --file misc/students.json --jsonArray",
+    "import-groups-data": "mongoimport --db gestionEtudiants --collection groups --file misc/groups.json --jsonArray"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "pug": "^3.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

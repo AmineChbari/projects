@@ -1,0 +1,14 @@
+[
+    { "studentNumber": "S001", "name": "DOE", "surnames": ["John", "Michael"] },
+    { "studentNumber": "S002", "name": "SMITH", "surnames": ["Anna", "Marie"] },
+    { "studentNumber": "S003", "name": "JOHNSON", "surnames": ["Robert", "James"] },
+    { "studentNumber": "S004", "name": "WILLIAMS", "surnames": ["Emily", "Sophia"] },
+    { "studentNumber": "S005", "name": "BROWN", "surnames": ["David", "Alexander"] },
+    { "studentNumber": "S006", "name": "JONES", "surnames": ["Sarah", "Elizabeth"] },
+    { "studentNumber": "S007", "name": "MILLER", "surnames": ["Christopher", "Daniel"] },
+    { "studentNumber": "S008", "name": "DAVIS", "surnames": ["Jessica", "Grace"] },
+    { "studentNumber": "S009", "name": "GARCIA", "surnames": ["Matthew", "Anthony"] },
+    { "studentNumber": "S010", "name": "RODRIGUEZ", "surnames": ["Olivia", "Emma"] },
+    { "studentNumber": "S011", "name": "MARTINEZ", "surnames": ["Benjamin", "Lucas"] },
+    { "studentNumber": "S012", "name": "HERNANDEZ", "surnames": ["Chloe", "Ava"] }
+]
