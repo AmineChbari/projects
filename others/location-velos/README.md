@@ -1,142 +1,207 @@
-# Projet de conception orientée objet V'lille🚲 — *JAVA*
-Projet de la matière Conception orienté objet en java portant sur la création d'un réseau de location des vélos et autre véhicules.
-## 📋 Travail du binôme:
+# 🚲 V'Lille — Réseau de location de véhicules
 
-👤 *Amine CHBARI*  
-GRP 1 / L3 INFORMATIQUE / UNIVERSITE DE LILLE  
-👤 *Mohamed Amine BENHAMMANE*  
-GRP 1 / L3 INFORMATIQUE / UNIVERSITE DE LILLE
+![Java](https://img.shields.io/badge/Java-11-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-3.x-C71A36?style=flat-square&logo=apachemaven&logoColor=white)
+![JUnit5](https://img.shields.io/badge/JUnit-5.10-25A162?style=flat-square&logo=junit5&logoColor=white)
+![JaCoCo](https://img.shields.io/badge/JaCoCo-Coverage-yellow?style=flat-square)
+![Design Patterns](https://img.shields.io/badge/Design%20Patterns-6-6C63FF?style=flat-square)
+![OOP](https://img.shields.io/badge/OOP-Advanced-blue?style=flat-square)
 
+Simulation d'un réseau de location de vélos et scooters en Java — projet académique L3 Informatique, Université de Lille. Implémente 6 design patterns OOP avancés dans un système de gestion de stations avec centre de contrôle, redistribution automatique, détection de vols et réparations.
 
-## 📋 How to
+---
 
-### 1. RECUPERER SOURCE DEPUIS DEPOT:
-Cloner le depot en local:  
-```bash 
-git clone git@gitlab-etu.fil.univ-lille.fr:amine.chbari.etu/projet-coo-g1.git projet
+## 📋 Table des matières
+
+- [Architecture](#-architecture)
+- [Design Patterns](#-design-patterns)
+- [Fonctionnalités](#-fonctionnalités)
+- [Scénarios](#-scénarios)
+- [Lancer le projet](#-lancer-le-projet)
+- [Tests & Couverture](#-tests--couverture)
+- [Structure du projet](#-structure-du-projet)
+- [Auteurs](#-auteurs)
+
+---
+
+## 🏗️ Architecture
+
+Le système est organisé autour de quatre domaines :
+
+| Package | Rôle |
+|---------|------|
+| `controlCenter` | Centre de contrôle — orchestre les stations, pilote la redistribution |
+| `station` | Stations physiques — stockage des véhicules, notifications |
+| `vehicle` | Véhicules — vélos classiques, électriques, scooters, décorateurs |
+| `staff` | Réparateurs — visite et répare les véhicules hors service |
+| `timer` | Gestionnaire de temps simulé pour les scénarios |
+| `ui` | Interface graphique Swing interactive |
+
+### Cycle de vie d'un véhicule
+
+```
+  [Créé]
+    │
+    ▼
+[Available] ──take()──▶ [InUse] ──put()──▶ [Available]
+    │                                            │
+    │                              (nbUsed > 3) │
+    │                                            ▼
+    │                                        [Broken] ──repair()──▶ [Available]
+    │
+    └──(seul en station > 6s)──▶ [Stolen]
 ```
 
-### 2. GENERER LA DOCUMENTATION:
-Générer la doc:   
-```bash 
-mvn javadoc:javadoc
-```  
+---
 
-📋 Voir le rapport de la documentation de code:
-- Sur Windows:
-```bash 
-start target/site/apidocs/index.html
-```
-- Sur Linux:
-```bash 
-xdg-open target/site/apidocs/index.html
+## 🎯 Design Patterns
+
+| Pattern | Classe(s) | Rôle dans le système |
+|---------|-----------|----------------------|
+| **Observer** | `ControlCenter`, `Station` | La station notifie le centre de contrôle à chaque prise/retour de véhicule |
+| **Strategy** | `RoundRobinStrategy`, `RandomStrategy` | Algorithme de redistribution des véhicules interchangeable à chaud |
+| **State** | `Available`, `InUse`, `Broken`, `Stolen` | Chaque état encapsule son propre comportement et ses transitions |
+| **Decorator** | `BasketDecorator`, `LuggageRackDecorator` | Ajout d'accessoires à un véhicule sans modifier sa classe |
+| **Visitor** | `ConcreteRepairer` | Réparation polymorphe : comportement différent selon le type de véhicule |
+| **Mediator** | `ControlCenter` | Coordination centralisée entre toutes les stations |
+
+---
+
+## ✨ Fonctionnalités
+
+- **Gestion de stations** : capacité configurable, ajout/retrait de véhicules
+- **Véhicules variés** : vélo classique, vélo électrique (batterie), scooter (batterie + recharge auto)
+- **Accessoires** (Decorator) : panier 🧺, porte-bagages 🧳
+- **États des véhicules** : disponible, en cours d'utilisation, hors service, volé
+- **Redistribution automatique** : déclenchée si une station est pleine ou vide (2 stratégies)
+- **Détection des vols** : un véhicule seul en station depuis 6 secondes est marqué volé
+- **Réparations** : véhicule cassé après 3 utilisations → réparé par un technicien (3s)
+- **Interface graphique** Swing interactive : voir les stations, prendre/rendre des véhicules, log en direct
+- **Interface console** colorée (ANSI) avec 5 scénarios automatiques
+
+---
+
+## 🎬 Scénarios
+
+| # | Nom | Description | Durée |
+|---|-----|-------------|-------|
+| 1 | Initialisation & distribution | 4 stations, 11 véhicules, 3 étapes de prise/retour, redistribution automatique | ~12s |
+| 2 | Redistribution (station PLEINE) | Station 1 remplie → centre de contrôle déclenche une redistribution | ~6s |
+| 3 | Redistribution (station VIDE) | Station 2 vide → centre de contrôle déclenche une redistribution | ~6s |
+| 4 | Véhicule hors service → réparation | Scooter utilisé 3 fois → passe Broken → réparé automatiquement | ~11s |
+| 5 | Véhicule volé | Vélo seul en station depuis >6s → passe à l'état Stolen | ~17s |
+| 6 | Interface graphique | Lance l'interface Swing interactive | — |
+
+---
+
+## 🚀 Lancer le projet
+
+**Prérequis :** Java 11+, Maven 3.x
+
+### Cloner le dépôt
+```bash
+git clone https://github.com/AmineChbari/projects.git
+cd projects/others/location-velos
 ```
 
-### 3. COMPILER ET EXECUTER LES SOURCES:
-Compiler:
-```bash 
+### Compiler
+```bash
 mvn compile
 ```
-Exécuter le main:
-```bash 
-mvn exec:java -Dexec.mainClass="coo.vlille.Main"
+
+### Lancer l'application (menu console + GUI)
+```bash
+mvn exec:java
 ```
 
-### 4. COMPILER ET EXECUTER LES TESTS:
-Compiler et executer les tests:
-```bash 
+### Lancer les tests
+```bash
 mvn test
 ```
-### 5. RAPPORT DE TEST:
-Voir le rapport de couverture de code par les tests:
-- Sur Windows:
-```bash 
-start target/site/jacoco/index.html
-```
-- Sur Linux:
-```bash 
-xdg-open target/site/jacoco/index.html
-```
 
-**View du rapport:** 📊
-![Rapport couverture de tests](coverage/image.png)
+### Générer le rapport de couverture (JaCoCo)
+```bash
+mvn verify
+```
+Rapport disponible dans : `target/site/jacoco/index.html`
 
-### 6. NETTOYER LE PROJET:   
-```bash 
-mvn clean
+### Générer la documentation Javadoc
+```bash
+mvn javadoc:javadoc
 ```
-### 7.GENERER UN JAR EXECUTABLE:
-```bash 
-mvn clean package
-```
-then:
-```bash 
+Documentation disponible dans : `target/site/apidocs/index.html`
+
+### Construire le JAR exécutable
+```bash
+mvn package
 java -jar target/vlille-1.0-SNAPSHOT.jar
 ```
 
-## 📋 Presentation d'élémemts de code
+---
 
-### Principes de conception utilisés:
-DESIGN PATTERN UTILISÉS:
+## 🧪 Tests & Couverture
 
-👉 **OBSERVER** : centre de controle est un observer qui notifié chaque fois que l'état d'une station (observable) change. Il est responsable de gérer tous les élements du réseau vlille, il est notifié lorsque une action se produit dans une station et réagit en appliquant le changement nécessaires.
+Le projet inclut **21 classes de tests** (JUnit 5) couvrant :
 
-👉 **STRATEGY** : On utilise ce design pattern pour suggerer plusieurs strategies de redistribution de Vehicle lorsqu'on souhaite le faire, on trouve la stratégie round Robin et une autre stratégie aleatoire, avec la possibilite de rejouter d'autres stratégies.
+- Cycle de vie des véhicules (états, transitions, exceptions)
+- Opérations des stations (put, take, isFull, isEmpty)
+- Centre de contrôle (redistribution, réparations, détection de vols)
+- Décorateurs (BasketDecorator, LuggageRackDecorator)
+- Stratégies de redistribution (RoundRobin, Random)
+- Réparateur (ConcreteRepairer, Repairer)
 
-👉 **DECORATEUR** : pour décorer les velos avec des objets (ex: Porte bagages, panier.. )
+```bash
+mvn test                  # Lancer tous les tests
+mvn verify                # Tests + rapport JaCoCo
+```
 
-👉 **STATE** : pour déterminer l'état d'un vehicule lorsqu'on souhaite executer une action dessus.
+---
 
-👉 **VISITOR** : On utilisé ce design pattern pour le personnel de réseau, dans notre exemple cela se produit avec le répérateur qui répare chaque véhicule avec une maniére différente (comme le scooter on doit rénitialiser la batterie à 100 %), et change le state à available to use.
+## 📁 Structure du projet
 
-### Elements de conception importants:
-- Pour le centre de Contrôle, nous somme partis sur le design pattern MEDIATOR au début, car il est notifié par les stations et le vélos, et applique aussi les changements necessaires en appelant les fonctions convenables, mais finalement on a choisi OBSERVER, car c'est plus proche de son vrai rôle,  il doit être notifié lorsque un station envoie un alerte poue sa redisribution et c'est la station même qui notifie lorsqu'un véhicule doit être réparé.
-- L'ensemble de projet est en anglais notamment les noms des classes, méthodes et la javadoc aussi. 
-- On fait deux versions de main, une avec un affichage sur le terminal avec des icônes et un autre avec une interface graphique basique.
+```
+location-velos/
+├── src/
+│   ├── main/
+│   │   ├── java/coo/vlille/
+│   │   │   ├── Main.java                    # Point d'entrée console (menu + 5 scénarios)
+│   │   │   ├── MainV2.java                  # Interface Swing (scénarios automatiques)
+│   │   │   ├── controlCenter/
+│   │   │   │   ├── ControlCenter.java       # Médiateur + Observer
+│   │   │   │   ├── Observer.java            # Interface Observer
+│   │   │   │   └── redistribution/
+│   │   │   │       ├── RedistributionStrategy.java
+│   │   │   │       ├── RoundRobinStrategy.java
+│   │   │   │       └── RandomStrategy.java
+│   │   │   ├── station/
+│   │   │   │   ├── Station.java             # Station physique (Observable)
+│   │   │   │   └── Observable.java
+│   │   │   ├── vehicle/
+│   │   │   │   ├── Vehicle.java             # Classe abstraite parente
+│   │   │   │   ├── bike/
+│   │   │   │   │   ├── classicBike/ClassicBike.java
+│   │   │   │   │   └── electricBike/ElectricBike.java
+│   │   │   │   ├── scooter/Scooter.java
+│   │   │   │   ├── state/                   # STATE pattern (4 états)
+│   │   │   │   ├── decorator/               # DECORATOR pattern
+│   │   │   │   └── util/Color.java
+│   │   │   ├── staff/repairer/
+│   │   │   │   ├── Repairer.java
+│   │   │   │   └── ConcreteRepairer.java    # VISITOR pattern
+│   │   │   ├── timer/TimeManager.java
+│   │   │   └── ui/VLilleApp.java            # Interface interactive Swing
+│   │   └── resources/image/
+│   │       ├── logo.png
+│   │       └── background.jpg
+│   └── test/java/coo/vlille/               # 21 classes de tests JUnit 5
+├── pom.xml
+└── README.md
+```
 
-### Scenarios de l'execution:
-SCENARIO 1️⃣ :  
-- Initialization normale avec des retraits et depots de différents véhicules.  
-- On trouve 4 Stations avec capacité [3, 3, 4, 5] puis faire des retraits and depots. 
+---
 
-SCÉNARIO 2️⃣ :
-- Déclenchement de la redistribution lorsque la station est full
+## 👥 Auteurs
 
-SCÉNARIO 3️⃣ :
-- Déclenchement de la redistribution lorsque la station est vide
-  
-SCÉNARIO 4️⃣ :  
-- Véhicule cassé puis réparé.  
-- Création de 2 stations avec une capacité de 3, pour chacune on donne un véhicule, on le reprends puis on le met dans l'autre station, aisin de suite, après un nombre d'utilisation il sera cassé et le réparateur devrait venir le réparer avec un délai de réparation de 3 secondes.
-  
-SCÉNARIO 5️⃣ :
-- Véhicule volé parce qu'il est seul pendant 2 périodes de temps.
-
-- Création une station avec une capacité de trois et 2 véhicules, en prendre un et laisser l'autre pendant deux périodes, le réparateur devrait venir le réparer.
-
-
-SCÉNARIO 6️⃣ :
-- Une interface graphique
-
-
-## 🎋 UML
-
-### Le lien vers le diagramme UML : [UML]
-https://lucid.app/lucidchart/081c345f-2551-4436-9657-afb5ce774f46/edit?view_items=Eg5~qenwvypp&invitationId=inv_d8ae35f0-19f1-4d4a-bd69-6a1512089d76 
-## REFERENCES
-
-### Sujet du projet de vlille : [vlille.pdf]
-
-### Consignes pour le rendu du  projet : [consignes.pdf]
-
-
-
-
-
-
-
-[vlille.pdf]: https://www.fil.univ-lille.fr/~quinton/coo/projet/vlille.pdf "sujet projet"
-
-[consignes.pdf]: https://www.fil.univ-lille.fr/~quinton/coo/projet/consignesRenduProjet.pdf "consignes de rendu"
-
-[UML]: https://lucid.app/lucidchart/081c345f-2551-4436-9657-afb5ce774f46/edit?view_items=Eg5~qenwvypp&invitationId=inv_d8ae35f0-19f1-4d4a-bd69-6a1512089d76 "link UML"
+**Amine Chbari** — L3 Informatique, Université de Lille  
+**Mohamed Amine Benhammane** — L3 Informatique, Université de Lille  
+Groupe 1 — Projet COO (Conception Orientée Objet)

@@ -2,8 +2,6 @@ package coo.vlille.station;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 import coo.vlille.controlCenter.ControlCenter;
 import coo.vlille.staff.repairer.ConcreteRepairer;
@@ -25,8 +23,6 @@ public class Station {
     private List<Vehicle> vehicles;
     /** Observer that handles distributing the vehicles when needed */
     private ControlCenter center;
-    /** Scheduler for checking if a vehicle has been in the station for more than a certain amount of seconds */
-    private ScheduledExecutorService scheduler;
     /** Number of seconds after which a vehicle is considered stolen */
     public static final int NB_SECONDS_STOLEN = 6;
 
@@ -42,7 +38,6 @@ public class Station {
         this.capacity = capacity;
         this.vehicles = new ArrayList<>();
         this.center = center;
-        this.scheduler = Executors.newScheduledThreadPool(1);
     }
 
     /**
@@ -62,11 +57,10 @@ public class Station {
      * If a vehicle is Stolen, it can't be used again.
      */
     public void checkStolen() {
-        for (Vehicle vehicle : vehicles) {
-            if (vehicles.contains(vehicle) && vehicles.size() == 1) {
-                vehicle.setState(new Stolen());
-                System.out.println("Vehicle " + vehicle.getId() + " is stolen and cannot be used.");
-            }
+        if (vehicles.size() == 1) {
+            Vehicle vehicle = vehicles.get(0);
+            vehicle.setState(new Stolen());
+            System.out.println("Vehicle " + vehicle.getId() + " is stolen and cannot be used.");
         }
     }
 

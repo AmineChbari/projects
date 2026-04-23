@@ -54,11 +54,6 @@
             <scope>test</scope>
         </dependency>
     
-        <dependency>
-            <groupId>org.hibernate.ogm</groupId>
-            <artifactId>hibernate-ogm-infinispan</artifactId>
-            <version>5.4.1.Final</version>
-        </dependency>
     </dependencies>
 
     <build>

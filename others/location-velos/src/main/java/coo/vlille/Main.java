@@ -79,9 +79,7 @@ public class Main {
     }
 
     private static void useMainV2Interface() {
-        MainV2 mainV2 = new MainV2();
-        mainV2.main(new String[0]);  // Appel de la méthode main avec un tableau vide
-
+        javax.swing.SwingUtilities.invokeLater(() -> new coo.vlille.ui.VLilleApp());
     }
 
     public static void scenario1() throws InterruptedException {
