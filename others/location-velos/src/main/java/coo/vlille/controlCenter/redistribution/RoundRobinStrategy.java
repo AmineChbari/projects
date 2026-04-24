@@ -65,14 +65,29 @@ public class RoundRobinStrategy implements RedistributionStrategy {
     private void distributeVehicles(List<Station> stations) throws VehicleException {
         int stationIndex = 0;
         int numStations = stations.size();
-
-        while (!elementsToHandle.isEmpty()) {
+        // First pass: respect the 80% soft cap, but stop when no station accepted during a full round.
+        int sinceLastPlace = 0;
+        while (!elementsToHandle.isEmpty() && sinceLastPlace < numStations) {
             Station currentStation = stations.get(stationIndex);
-            if (canAddVehicle(currentStation)) {
-                Vehicle vehicle = elementsToHandle.poll(); // Retrieves the vehicle in FIFO order
-                currentStation.put(vehicle);
+            if (canAddVehicle(currentStation) && currentStation.putForRedistribution(elementsToHandle.peek())) {
+                elementsToHandle.poll();
+                sinceLastPlace = 0;
+            } else {
+                sinceLastPlace++;
             }
-            stationIndex = (stationIndex + 1) % numStations; // Move to the next station
+            stationIndex = (stationIndex + 1) % numStations;
+        }
+        // Second pass: if vehicles remain, ignore the 80% cap and just fill any non-full station.
+        sinceLastPlace = 0;
+        while (!elementsToHandle.isEmpty() && sinceLastPlace < numStations) {
+            Station currentStation = stations.get(stationIndex);
+            if (currentStation.putForRedistribution(elementsToHandle.peek())) {
+                elementsToHandle.poll();
+                sinceLastPlace = 0;
+            } else {
+                sinceLastPlace++;
+            }
+            stationIndex = (stationIndex + 1) % numStations;
         }
     }
 
@@ -120,10 +135,10 @@ public class RoundRobinStrategy implements RedistributionStrategy {
           * @throws VehicleException 
           */
          private void addVehicleToStation(Station station) throws VehicleException {
-        Vehicle vehicle = elementsToHandle.poll();
-        if (vehicle != null) {
-            station.put(vehicle);
-            System.out.println("Added a vehicle to the station. Current occupancy: " + 
+        Vehicle vehicle = elementsToHandle.peek();
+        if (vehicle != null && station.putForRedistribution(vehicle)) {
+            elementsToHandle.poll();
+            System.out.println("Added a vehicle to the station. Current occupancy: " +
                 ((double) station.totalBikes() / station.getCapacity()) * 100 + "%");
         }
     }

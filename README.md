@@ -5,7 +5,9 @@
 ![Angular](https://img.shields.io/badge/Angular-21-DD0031?style=flat-square&logo=angular)
 ![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=flat-square&logo=node.js)
 ![Java](https://img.shields.io/badge/Java-OOP-007396?style=flat-square&logo=java)
+![MongoDB](https://img.shields.io/badge/MongoDB-7-47A248?style=flat-square&logo=mongodb)
 ![Canvas](https://img.shields.io/badge/Canvas-2D-007ACC?style=flat-square)
+![Design Patterns](https://img.shields.io/badge/Design%20Patterns-GoF-blue?style=flat-square)
 
 > M1 Ingénierie Logiciel — ISCOD  
 > [aminechbaibar@gmail.com](mailto:aminechbaibar@gmail.com)
@@ -28,6 +30,24 @@ Passionné par le développement web et logiciel, je travaille aussi bien côté
 Application de vote en temps réel avec interface admin et interface votant. Les votes sont transmis via WebSocket, les résultats s'actualisent instantanément. Design glassmorphism.
 
 **Points clés :** WebSocket bidirectionnel, séparation admin/votant, gestion des événements `disconnect`, validation des votes côté serveur.
+
+---
+
+### 🚲 V'Lille — Réseau de location de véhicules
+**`others/location-velos`** — Java 11 · Maven · Swing · JUnit 5
+
+Simulation d'un réseau de stations de vélos, scooters et véhicules électriques, avec une interface graphique Swing interactive (illustrations vectorielles dessinées en Graphics2D). Le projet démontre **6 design patterns GoF** : Observer, Strategy, State, Decorator, Visitor, Mediator.
+
+**Points clés :** architecture OOP modulaire, 100 tests JUnit 5 avec couverture JaCoCo, stratégies de redistribution (RoundRobin / Random), cycle de vie des véhicules (Available → InUse → Broken → Stolen), GUI Swing avec logo, icônes vélos vectorielles et cartes de stations illustrées.
+
+---
+
+### 🎓 Gestion Étudiants & Groupes
+**`others/gestion-etudiants`** — Node.js · Express · MongoDB · Webpack · Pug
+
+Application web full-stack de gestion d'étudiants et de répartition en 1 à 6 groupes. CRUD étudiants, assignation manuelle ou auto-distribution équilibrée, consultation des données en HTML ou JSON sur les mêmes routes via `?json=true`.
+
+**Points clés :** API REST complète (GET / POST / PUT / DELETE + assign / auto-assign / empty-all), Mongoose ODM, templates Pug, build Webpack client → `server/public`, scripts `npm run dev` / `npm run watch` pour développement avec hot reload.
 
 ---
 
@@ -80,10 +100,13 @@ Jeu de tir à l'arc avec cibles mobiles, oiseaux voleurs et paquets de flèches 
 
 | Domaine | Technologies |
 |---------|-------------|
-| Front-end | Angular 21, React, JavaScript ES2022, TypeScript, HTML5/CSS3 |
-| Back-end | Node.js, Express, Socket.IO |
+| Front-end | Angular 21, React, JavaScript ES2022, TypeScript, HTML5/CSS3, Pug |
+| Back-end | Node.js, Express, Socket.IO, MongoDB / Mongoose |
+| Desktop / GUI | Java Swing, Graphics2D vectoriel |
+| Design patterns | Observer, Strategy, State, Decorator, Visitor, Mediator |
 | Jeux | Canvas 2D API, requestAnimationFrame, AABB collision |
-| Build | Webpack 5, Babel, npm |
+| Tests | JUnit 5, JaCoCo |
+| Build | Maven, Webpack 5, Babel, npm |
 | Langages | JavaScript, TypeScript, Java, PHP |
 | Outils | Git, VS Code, Webpack DevServer |
 

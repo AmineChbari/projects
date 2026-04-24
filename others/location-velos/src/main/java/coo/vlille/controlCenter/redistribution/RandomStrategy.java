@@ -49,12 +49,14 @@ public class RandomStrategy implements RedistributionStrategy {
      * @throws VehicleException 
      */
     private void distributeVehicles(List<Vehicle> vehicles, List<Station> stations) throws VehicleException {
-        int stationIndex = 0;
         int numStations = stations.size();
-
         for (Vehicle vehicle : vehicles) {
-            stations.get(stationIndex).put(vehicle);
-            stationIndex = (stationIndex + 1) % numStations; // Move to the next station
+            // Try each station starting from a random one until one accepts the vehicle.
+            int start = random.nextInt(numStations);
+            for (int i = 0; i < numStations; i++) {
+                Station target = stations.get((start + i) % numStations);
+                if (target.putForRedistribution(vehicle)) break;
+            }
         }
     }
 

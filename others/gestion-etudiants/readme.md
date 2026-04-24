@@ -1,6 +1,15 @@
 # Gestion Étudiants et Groupes
 
-Une application de gestion des étudiants en ligne construite avec Node.js, Express.js, MongoDB et Webpack.
+![Node.js](https://img.shields.io/badge/Node.js-18-339933?style=flat-square&logo=node.js)
+![Express](https://img.shields.io/badge/Express-4-000000?style=flat-square&logo=express)
+![MongoDB](https://img.shields.io/badge/MongoDB-7-47A248?style=flat-square&logo=mongodb)
+![Mongoose](https://img.shields.io/badge/Mongoose-ODM-880000?style=flat-square)
+![Webpack](https://img.shields.io/badge/Webpack-5-8DD6F9?style=flat-square&logo=webpack)
+![Pug](https://img.shields.io/badge/Pug-Templates-A86454?style=flat-square&logo=pug)
+
+Application web complète de gestion d'étudiants et de répartition en groupes : CRUD étudiants, assignation automatique ou manuelle de 1 à 6 groupes, consultation JSON via `?json=true`. Back-end Node.js/Express + MongoDB/Mongoose, front-end bundlé avec Webpack et templates Pug.
+
+**Points clés :** API REST complète (CRUD + assign / auto-assign / empty-all), auto-distribution équilibrée, double rendu HTML/JSON sur les mêmes routes, séparation client / serveur avec build Webpack vers `server/public`.
 
 ---
 

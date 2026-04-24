@@ -156,6 +156,20 @@ public class Station {
     }
 
     /**
+     * Adds a vehicle to the station during a redistribution, without going through
+     * the state machine. The vehicle keeps its current state (Available, Broken, …)
+     * because redistribution is an internal move between stations, not a user put-back.
+     *
+     * @param v the vehicle to move into this station
+     * @return true if the vehicle was added, false if the station is full
+     */
+    public boolean putForRedistribution(Vehicle v) {
+        if (isFull()) return false;
+        this.vehicles.add(v);
+        return true;
+    }
+
+    /**
      * Clears all vehicles from the station.
      */
     public void clearVehicles() {
